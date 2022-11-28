@@ -14,12 +14,12 @@ public class Pedido {
     private float valorTotal;
     private ArrayList<Produto> itensDoPedido = new ArrayList();
 
-    public Pedido(String idPedido, LocalDate dataPedido, LocalTime horarioPedido, String estadoDoPedido, LocalTime horarioEntrega, String descricaoDetalhada, float valorTotal) {
+    public Pedido(String idPedido, String estadoDoPedido, LocalTime horarioEntrega, String descricaoDetalhada, float valorTotal) {
         this.idPedido = idPedido;
-        this.dataPedido = dataPedido;
-        this.horarioPedido = horarioPedido;
-        this.estadoDoPedido = estadoDoPedido;
-        this.horarioEntrega = horarioEntrega;
+        this.dataPedido =  LocalDate.now();
+        this.horarioPedido = LocalTime.now();
+        this.estadoDoPedido = "Em preparo";
+        this.horarioEntrega = LocalTime.now().plusHours(2);
         this.descricaoDetalhada = descricaoDetalhada;
         this.valorTotal = valorTotal;
     }
@@ -28,9 +28,6 @@ public class Pedido {
         
     }
 
-    
-    
-        
     public String getIdPedido() {
         return idPedido;
     }
@@ -94,6 +91,24 @@ public class Pedido {
     public void setItensDoPedido(ArrayList<Produto> itensDoPedido) {
         this.itensDoPedido = itensDoPedido;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pedido{");
+        sb.append("idPedido=").append(idPedido);
+        sb.append(", dataPedido=").append(dataPedido);
+        sb.append(", horarioPedido=").append(horarioPedido);
+        sb.append(", estadoDoPedido=").append(estadoDoPedido);
+        sb.append(", horarioEntrega=").append(horarioEntrega);
+        sb.append(", descricaoDetalhada=").append(descricaoDetalhada);
+        sb.append(", valorTotal=").append(valorTotal);
+        sb.append(", itensDoPedido=").append(itensDoPedido);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    
     
     
 }

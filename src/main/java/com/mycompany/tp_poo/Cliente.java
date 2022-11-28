@@ -8,21 +8,23 @@ public class Cliente {
     private String endereco;
     private String cpf;
     private ArrayList<Pedido> ultimosPedidos = new ArrayList();
-
+    
+    //questao 10a
+    private static int numClientes = 0;
+    
+    public  Cliente() {
+        numClientes++;
+    }
+    public static int getNumClientes(){
+        return numClientes;
+    }
     public Cliente(String nome, String telefone, String endereco, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.cpf = cpf;
     }
-
-    
-    
-    public Cliente(){
-    }
-    
-    
-    
+   
     public String getNome() {
         return nome;
     }
@@ -47,12 +49,12 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String getCpfc() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String clientId) {
-        this.cpf = clientId;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public ArrayList<Pedido> getUltimosPedidos() {
@@ -65,8 +67,12 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", telefone=" + telefone + ", endereco=" + endereco + ", cpf=" + cpf + ", ultimosPedidos=" + ultimosPedidos + '}';
+        return "\nCliente{" + "\nnome=" + nome + ", \ntelefone=" + telefone + ", \nendereco=" + endereco + ", \ncpf=" + cpf + ", \nultimosPedidos=" + ultimosPedidos +'\n'+'}';
     }
+
+    
+
+    
     
     
     

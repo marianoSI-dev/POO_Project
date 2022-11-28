@@ -7,26 +7,22 @@ public class Funcionario {
     private String telefone;
     private String endereco;
     private String cfp;
-    private String login;
     private String senha;
 
-    public Funcionario(String nome, String telefone, String endereco, String cfp, String login, String senha) {
+    public Funcionario(String nome, String telefone, String endereco, String cfp, String senha) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.cfp = cfp;
-        this.login = login;
         this.senha = senha;
     }
     public Funcionario(){
     
     }
     
-    public void alterarLogin(String login){
-        this.setLogin(login);
-    }
-    public void alterarSenha(String login){
-        this.setLogin(login);
+    
+    public void alterarSenha(String senha){
+        this.setSenha(senha);
     }
     
     public String getNome() {
@@ -61,14 +57,7 @@ public class Funcionario {
         this.cfp = cfp;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
+  
     public String getSenha() {
         return senha;
     }
@@ -76,6 +65,13 @@ public class Funcionario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    @Override
+    public String toString() {
+        return "\nFuncionario{" + "\nnome=" + nome + ",\ntelefone=" + telefone + ",\nendereco=" + endereco + ",\ncfp=" + cfp + ",\nsenha=" + senha +'\n' + '}';
+    }
+
+    
     
     
 }

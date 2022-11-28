@@ -3,10 +3,15 @@ package com.mycompany.tp_poo;
 public class Administrador extends Funcionario {
     private boolean isAdmin;
 
-    public Administrador(boolean isAdmin, String nome, String telefone, String endereco, String cfp, String login, String senha) {
-        super(nome, telefone, endereco, cfp, login, senha);
-        this.isAdmin = isAdmin;
+    public Administrador(String nome, String telefone, String endereco, String cfp, String senha, boolean admin) {
+        super(nome, telefone, endereco, cfp, senha);
+        this.setIsAdmin(admin);
     }
+
+    public Administrador() {
+    }
+
+    
 
     public boolean isIsAdmin() {
         return isAdmin;
