@@ -94,18 +94,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Pedido{");
-        sb.append("idPedido=").append(idPedido);
-        sb.append(", dataPedido=").append(dataPedido);
-        sb.append(", horarioPedido=").append(horarioPedido);
-        sb.append(", estadoDoPedido=").append(estadoDoPedido);
-        sb.append(", horarioEntrega=").append(horarioEntrega);
-        sb.append(", descricaoDetalhada=").append(descricaoDetalhada);
-        sb.append(", valorTotal=").append(valorTotal);
-        sb.append(", itensDoPedido=").append(itensDoPedido);
-        sb.append('}');
-        return sb.toString();
+        return "\nPedido{" + "\nidPedido=" + idPedido + ", \ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
     }
 
     

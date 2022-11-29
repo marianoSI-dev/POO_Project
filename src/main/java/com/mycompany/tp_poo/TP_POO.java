@@ -8,10 +8,11 @@ public class TP_POO {
 
     private static final Funcionario funcionariosCadastrados[] = new Funcionario[15];
     private static final ArrayList<Cliente> clientesCadastrados = new ArrayList<>();
+    private static final ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
     private static final ArrayList<Pedido> meusPedidos = new ArrayList<>();
     private static final ArrayList<Produto> meusProdutos = new ArrayList<>();
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         funcionariosCadastrados[0] = new Funcionario("Ana Malu Lorena Nunes","(38) 98383-9442","Rua Do Amparo, 710, Centro","190.880.226-07","bCp4xWgsdu");
         funcionariosCadastrados[1] = new Funcionario("Cláudia Brenda Figueiredo","(38) 99828-1917","Rua Da Glória, 210, Centro","679.717.286-11","QIjscSsm3U");
         funcionariosCadastrados[2] = new Funcionario("Daniela Tânia Campos","(38) 98218-4861","Rua Paula Vieira, 776, Presidente","596.240.456-40","7TUKtkbOBJ");
@@ -26,7 +27,7 @@ public class TP_POO {
         funcionariosCadastrados[11] = new Funcionario("Giovanna Andreia Barros","(38) 99968-0975","Rua Abílio Barreto, 24, Rio Grande","413.736.686-10","F1C0oITY6h");
         funcionariosCadastrados[12] = new Funcionario("Levi Kevin Mateus Corte Real","(38) 99224-8069","Rua Imperatriz, 21, Jardim Imperial","162.900.786-23","j8uyx3mcQ3");
         funcionariosCadastrados[13] = new Funcionario("Alana Evelyn Alessandra Silveira","(38) 99134-6024","Rua Flávia, 650, Pedra Grande","922.588.406-00","DmaBiaMco8");
-        funcionariosCadastrados[14] = new Funcionario("Daniela Sophia Eliane da Paz","(38) 99909-4465","Rua Antonio das Graças Nascimento, 54, Bela Vista","005.326.736-20","28rGyXjHbC");
+        
         
         
         meusProdutos.add(new Produto("Cachorro Quente", "Pão, Salcicha, Batata-palha","Delicioso cachorro quente", (float) 12.00));
@@ -42,12 +43,15 @@ public class TP_POO {
         
         //area de testes
         
-        System.out.println(Arrays.toString(funcionariosCadastrados));
-        Sistema.criarFuncionario();
-        System.out.println(Arrays.toString(funcionariosCadastrados));
+        //System.out.println(Arrays.toString(funcionariosCadastrados));
+        //Sistema.editarFuncionario();
+        //System.out.println(Arrays.toString(funcionariosCadastrados));
         
-        
-        
+        System.out.println(getAdministradoresCadastrados());
+        Sistema.criarAdmistrador();
+        Sistema.criarAdmistrador();
+        Sistema.deletarAdministrador();
+        System.out.println(getAdministradoresCadastrados());
         
         //System.out.println(getClientesCadastrados());
         //Sistema.deletarCliente();
@@ -83,6 +87,10 @@ public class TP_POO {
 
     public static ArrayList<Produto> getMeusProdutos() {
         return meusProdutos;
+    }
+
+    public static ArrayList<Administrador> getAdministradoresCadastrados() {
+        return administradoresCadastrados;
     }
     
     
