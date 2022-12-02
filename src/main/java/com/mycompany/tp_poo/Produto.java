@@ -1,6 +1,6 @@
 package com.mycompany.tp_poo;
 
-import java.util.ArrayList;
+
 public class Produto {
     private String nomeProduto;
     private String ingredientes;
@@ -51,7 +51,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" + "\nnomeProduto=" + nomeProduto + ", \ningredientes=" + ingredientes + ", \ndescricaoProduto=" + descricaoProduto + ", \npreco=" + preco + '}';
+        return "\nProduto{" + "\nnomeProduto=" + nomeProduto + ", \ningredientes=" + ingredientes + ", \ndescricaoProduto=" + descricaoProduto + ", \npreco=" + preco + '}';
     }
     
     

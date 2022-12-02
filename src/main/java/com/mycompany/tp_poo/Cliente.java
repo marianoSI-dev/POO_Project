@@ -7,7 +7,7 @@ public class Cliente {
     private String telefone;
     private String endereco;
     private String cpf;
-    private ArrayList<Pedido> ultimosPedidos = new ArrayList();
+    private Pedido pedido = new Pedido();
     
     //questao 10a
     private static int numClientes = 0;
@@ -57,17 +57,17 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public ArrayList<Pedido> getUltimosPedidos() {
-        return ultimosPedidos;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setUltimosPedidos(ArrayList<Pedido> ultimosPedidos) {
-        this.ultimosPedidos = ultimosPedidos;
+    public void setPedido(Pedido Pedidos) {
+        this.pedido = Pedidos;
     } 
 
     @Override
     public String toString() {
-        return "\nCliente{" + "\nnome=" + nome + ", \ntelefone=" + telefone + ", \nendereco=" + endereco + ", \ncpf=" + cpf + ", \nultimosPedidos=" + ultimosPedidos +'\n'+'}';
+        return "\nCliente{" + "\nnome=" + nome + ", \ntelefone=" + telefone + ", \nendereco=" + endereco + ", \ncpf=" + cpf + ", \nultimosPedidos=" + pedido +'\n'+'}';
     }
 
     

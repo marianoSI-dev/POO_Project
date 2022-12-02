@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Pedido {
-    private String idPedido;
+
     private LocalDate dataPedido;
     private LocalTime horarioPedido;
     private String estadoDoPedido;
@@ -14,8 +14,7 @@ public class Pedido {
     private float valorTotal;
     private ArrayList<Produto> itensDoPedido = new ArrayList();
 
-    public Pedido(String idPedido, String estadoDoPedido, LocalTime horarioEntrega, String descricaoDetalhada, float valorTotal) {
-        this.idPedido = idPedido;
+    public Pedido(String estadoDoPedido, LocalTime horarioEntrega, String descricaoDetalhada, float valorTotal) {      
         this.dataPedido =  LocalDate.now();
         this.horarioPedido = LocalTime.now();
         this.estadoDoPedido = "Em preparo";
@@ -23,19 +22,16 @@ public class Pedido {
         this.descricaoDetalhada = descricaoDetalhada;
         this.valorTotal = valorTotal;
     }
-    
     public Pedido(){
-        
+       
     }
+    
+ 
 
-    public String getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(String idPedido) {
-        this.idPedido = idPedido;
-    }
-
+    
+    
+    
+    
     public LocalDate getDataPedido() {
         return dataPedido;
     }
@@ -94,7 +90,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "\nPedido{" + "\nidPedido=" + idPedido + ", \ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
+        return "\nPedido{"+ "\ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
     }
 
     
