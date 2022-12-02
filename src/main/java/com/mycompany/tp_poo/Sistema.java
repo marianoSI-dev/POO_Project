@@ -320,7 +320,7 @@ public class Sistema {
         float valorTotal = 0;
         boolean controlador = true;
         
-        //novoPedido.setId();
+        novoPedido.setId(TP_POO.getMeusPedidos().size());
         novoPedido.setDataPedido(LocalDate.now());
         novoPedido.setHorarioPedido(LocalTime.now());
         novoPedido.setEstadoDoPedido("Em preparo");

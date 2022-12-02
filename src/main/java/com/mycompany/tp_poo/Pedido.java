@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Pedido {
 
+    private int id;
     private LocalDate dataPedido;
     private LocalTime horarioPedido;
     private String estadoDoPedido;
@@ -25,13 +26,17 @@ public class Pedido {
     public Pedido(){
        
     }
-    
- 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    
-    
-    
+     
+  
     public LocalDate getDataPedido() {
         return dataPedido;
     }
@@ -90,7 +95,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "\nPedido{"+ "\ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
+        return "\nPedido{"+ "\nidPedido=" + id +"\ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
     }
 
     
