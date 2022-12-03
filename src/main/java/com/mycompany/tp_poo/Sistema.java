@@ -37,6 +37,7 @@ public class Sistema {
     public static void editarCliente(){
         Scanner scan = new Scanner(System.in);
         String cpf;
+        String resposta;
         
         System.out.println("Informe o CPF do cliente que deseja editar:");
         cpf = (scan.nextLine());
@@ -44,40 +45,88 @@ public class Sistema {
         try {
             for(Cliente cliente : TP_POO.getClientesCadastrados()){
                 if(cliente.getCpf().equals(cpf)){
-                    String alteracao;
-                    System.out.println("""
-                                       O que voce deseja alterar?
-                                       1 - Nome
-                                       2 - Telefone
-                                       3 - Endereco
-                                       4 - Cpf:""");
-                    alteracao =(scan.nextLine());
-                    switch (alteracao) {
-                        case "1" -> {
-                            String novoNome;
-                            System.out.println("Insira o novo nome: ");
-                            novoNome = (scan.nextLine());
-                            cliente.setNome(novoNome);
-                        }
-                        case "2" -> {
-                            String novoTelefone;
-                            System.out.println("Insira o novo telefone: ");
-                            novoTelefone = (scan.nextLine());
-                            cliente.setTelefone(novoTelefone);
-                        }
-                        case "3" -> {
-                            String novoEndereco;
-                            System.out.println("Insira o novo endereço: ");
-                            novoEndereco = (scan.nextLine());
-                            cliente.setEndereco(novoEndereco);
-                        }
-                        case "4" -> {
-                            String novoCpf;
-                            System.out.println("Insira o novo cpf: ");
-                            novoCpf = (scan.nextLine());
-                            cliente.setCpf(novoCpf);
+                    boolean controlador = true;
+                    while(controlador){
+                        String alteracao;
+                        System.out.println("""
+                                           O que voce deseja alterar?
+                                           1 - Nome
+                                           2 - Telefone
+                                           3 - Endereco
+                                           4 - Cpf:""");
+                        alteracao =(scan.nextLine());
+                        switch (alteracao) {
+                            case "1" -> {
+                                String novoNome;
+                                System.out.println("Insira o novo nome: ");
+                                novoNome = (scan.nextLine());
+                                cliente.setNome(novoNome);
+                                System.out.println("Nome alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "2" -> {
+                                String novoTelefone;
+                                System.out.println("Insira o novo telefone: ");
+                                novoTelefone = (scan.nextLine());
+                                cliente.setTelefone(novoTelefone);
+                                System.out.println("Telefone alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "3" -> {
+                                String novoEndereco;
+                                System.out.println("Insira o novo endereço: ");
+                                novoEndereco = (scan.nextLine());
+                                cliente.setEndereco(novoEndereco);
+                                System.out.println("Endereço alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "4" -> {
+                                String novoCpf;
+                                System.out.println("Insira o novo cpf: ");
+                                novoCpf = (scan.nextLine());
+                                cliente.setCpf(novoCpf);
+                                System.out.println("Senha alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
                         }
                     }
+                    
                 }
             }
         }
@@ -161,6 +210,7 @@ public class Sistema {
     public static void editarFuncionario(){
         Scanner scan = new Scanner(System.in);
         String cpf;
+        String resposta;
         
         System.out.println("Informe o CPF do funcionário que deseja editar:");
         cpf = (scan.nextLine());
@@ -168,47 +218,105 @@ public class Sistema {
         try {
             for(Funcionario funcionario : TP_POO.getFuncionariosCadastrados()){
                 if(funcionario.getCfp().equals(cpf)){
-                    String alteracao;
-                    System.out.println("""
-                                       O que voce deseja alterar?
-                                       1 - Nome
-                                       2 - Telefone
-                                       3 - Endereco
-                                       4 - Cpf:
-                                       5 - Senha""");
-                    alteracao =(scan.nextLine());
-                    switch (alteracao) {
-                        case "1" -> {
-                            String novoNome;
-                            System.out.println("Insira o novo nome: ");
-                            novoNome = (scan.nextLine());
-                            funcionario.setNome(novoNome);
+                    boolean controlador = true;
+                    while(controlador){
+                        String alteracao;
+                        System.out.println("""
+                                           O que voce deseja alterar?
+                                           1 - Nome
+                                           2 - Telefone
+                                           3 - Endereco
+                                           4 - Cpf:
+                                           5 - Senha""");
+                        alteracao =(scan.nextLine());
+                        switch (alteracao) {
+                            case "1" -> {
+                                String novoNome;
+                                System.out.println("Insira o novo nome: ");
+                                novoNome = (scan.nextLine());
+                                funcionario.setNome(novoNome);
+                                System.out.println("Nome alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "2" -> {
+                                String novoTelefone;
+                                System.out.println("Insira o novo telefone: ");
+                                novoTelefone = (scan.nextLine());
+                                funcionario.setTelefone(novoTelefone);
+                                System.out.println("Telefone alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "3" -> {
+                                String novoEndereco;
+                                System.out.println("Insira o novo endereço: ");
+                                novoEndereco = (scan.nextLine());
+                                funcionario.setEndereco(novoEndereco);
+                                System.out.println("Endereço alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "4" -> {
+                                String novoCpf;
+                                System.out.println("Insira o novo cpf: ");
+                                novoCpf = (scan.nextLine());
+                                funcionario.setCfp(novoCpf);
+                                System.out.println("CPF alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "5" -> {
+                                String novaSenha;
+                                System.out.println("Insira a nova senha: ");
+                                novaSenha = (scan.nextLine());
+                                funcionario.setSenha(novaSenha);
+                                System.out.println("Senha alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
                         }
-                        case "2" -> {
-                            String novoTelefone;
-                            System.out.println("Insira o novo telefone: ");
-                            novoTelefone = (scan.nextLine());
-                            funcionario.setTelefone(novoTelefone);
-                        }
-                        case "3" -> {
-                            String novoEndereco;
-                            System.out.println("Insira o novo endereço: ");
-                            novoEndereco = (scan.nextLine());
-                            funcionario.setEndereco(novoEndereco);
-                        }
-                        case "4" -> {
-                            String novoCpf;
-                            System.out.println("Insira o novo cpf: ");
-                            novoCpf = (scan.nextLine());
-                            funcionario.setCfp(novoCpf);
-                        }
-                        case "5" -> {
-                            String novaSenha;
-                            System.out.println("Insira a nova senha: ");
-                            novaSenha = (scan.nextLine());
-                            funcionario.setSenha(novaSenha);
-                        }
-                    }
+                    }                   
                 }
             }
         }
@@ -244,6 +352,7 @@ public class Sistema {
     public static void editarAdmistrador(){
         Scanner scan = new Scanner(System.in);
         String cpf;
+        String resposta;
         
         System.out.println("Informe o CPF do administrador que deseja editar:");
         cpf = (scan.nextLine());
@@ -251,47 +360,106 @@ public class Sistema {
         try {
             for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
                 if(admin.getCfp().equals(cpf)){
-                    String alteracao;
-                    System.out.println("""
-                                       O que voce deseja alterar?
-                                       1 - Nome
-                                       2 - Telefone
-                                       3 - Endereco
-                                       4 - Cpf:
-                                       5 - Senha: """);
-                    alteracao =(scan.nextLine());
-                    switch (alteracao) {
-                        case "1" -> {
-                            String novoNome;
-                            System.out.println("Insira o novo nome: ");
-                            novoNome = (scan.nextLine());
-                            admin.setNome(novoNome);
-                        }
-                        case "2" -> {
-                            String novoTelefone;
-                            System.out.println("Insira o novo telefone: ");
-                            novoTelefone = (scan.nextLine());
-                            admin.setTelefone(novoTelefone);
-                        }
-                        case "3" -> {
-                            String novoEndereco;
-                            System.out.println("Insira o novo endereço: ");
-                            novoEndereco = (scan.nextLine());
-                            admin.setEndereco(novoEndereco);
-                        }
-                        case "4" -> {
-                            String novoCpf;
-                            System.out.println("Insira o novo cpf: ");
-                            novoCpf = (scan.nextLine());
-                            admin.setCfp(novoCpf);
-                        }
-                        case "5" -> {
-                            String novaSenha;
-                            System.out.println("Insira a nova senha: ");
-                            novaSenha = (scan.nextLine());
-                            admin.setCfp(novaSenha);
+                    boolean controlador = true;
+                    while(controlador){
+                       String alteracao;
+                        System.out.println("""
+                                           O que voce deseja alterar?
+                                           1 - Nome
+                                           2 - Telefone
+                                           3 - Endereco
+                                           4 - Cpf:
+                                           5 - Senha: """);
+                        alteracao =(scan.nextLine());
+                        switch (alteracao) {
+                            case "1" -> {
+                                String novoNome;
+                                System.out.println("Insira o novo nome: ");
+                                novoNome = (scan.nextLine());
+                                admin.setNome(novoNome);
+                                System.out.println("Nome alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "2" -> {
+                                String novoTelefone;
+                                System.out.println("Insira o novo telefone: ");
+                                novoTelefone = (scan.nextLine());
+                                admin.setTelefone(novoTelefone);
+                                System.out.println("Telefone alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "3" -> {
+                                String novoEndereco;
+                                System.out.println("Insira o novo endereço: ");
+                                novoEndereco = (scan.nextLine());
+                                admin.setEndereco(novoEndereco);
+                                System.out.println("Endereço alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "4" -> {
+                                String novoCpf;
+                                System.out.println("Insira o novo cpf: ");
+                                novoCpf = (scan.nextLine());
+                                admin.setCfp(novoCpf);
+                                System.out.println("CPF alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
+                            case "5" -> {
+                                String novaSenha;
+                                System.out.println("Insira a nova senha: ");
+                                novaSenha = (scan.nextLine());
+                                admin.setSenha(novaSenha);
+                                System.out.println("Senha alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                resposta = (scan.nextLine());
+                                if(resposta.equals("S")||resposta.equals("s")){
+                                    controlador = true;
+                                }else if(resposta.equals("N")||resposta.equals("n")){
+                                    controlador = false;
+                                }else{
+                                    System.out.println("Opção inválida");
+                                    controlador = false;
+                                }
+                            }
                         }
                     }
+                    
                 }
             }
         }
@@ -342,67 +510,35 @@ public class Sistema {
 
                 while(controlador){
                     Integer produto;
-                    System.out.println("Adicionar produtos ao pedido:\n "
-                        + "\n1 - Cachorro Quente"
-                        + "                 2 - Beirute"
-                        + "\n3 - Esfiha aberta de carne"
-                        + "          4 - Mini Pizza"
-                        + "\n5 - Hambúrguer"
-                        + "                      6 - Esfiha aberta de queijo"
-                        + "\n7 - Esfiha aberta de carne"
-                        + "          8 - Refrigerante lata"
-                        + "\n9 - Refrigerante 2 litros"
-                        + "\n10 - ENCERRAR PEDIDO");
+                    System.out.println("Adicionar produtos ao pedido:\n ");
+                    for(Produto produtos : TP_POO.getMeusProdutos()){
+                        System.out.println(produtos.getId() +" - "+ produtos.getNomeProduto());
+                    }                   
                     produto =(scan.nextInt());
-                    switch(produto){
-                        case 1 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(0)); 
-                            valorTotal +=TP_POO.getMeusProdutos().get(0).getPreco();
-                        }
-                        case 2 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(1));
-                            valorTotal +=TP_POO.getMeusProdutos().get(1).getPreco();
-                        }
-                        case 3 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(2));
-                            valorTotal +=TP_POO.getMeusProdutos().get(2).getPreco();
-                        }
-                        case 4 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(3));
-                            valorTotal +=TP_POO.getMeusProdutos().get(3).getPreco();
-                        }
-                        case 5 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(4));
-                            valorTotal +=TP_POO.getMeusProdutos().get(4).getPreco();
-                        }
-                        case 6 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(5));
-                            valorTotal +=TP_POO.getMeusProdutos().get(5).getPreco();
-                        }
-                        case 7 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(6));
-                            valorTotal +=TP_POO.getMeusProdutos().get(6).getPreco();
-                        }
-                        case 8 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(7));
-                            valorTotal +=TP_POO.getMeusProdutos().get(7).getPreco();
-                        }
-                        case 9 -> {
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(8));
-                            valorTotal +=TP_POO.getMeusProdutos().get(8).getPreco();
-                        }
-                        case 10 -> {
-                            controlador = false;
-                            break;   
-                        }
-                        default ->{
-                            System.out.println("Produto inexistente");   
+                    scan.nextLine();
+                    for(Produto produtoEscolhido : TP_POO.getMeusProdutos()){
+                        String opcao;
+                        
+                        if(produtoEscolhido.getId() == produto){
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(produto)); 
+                            valorTotal +=TP_POO.getMeusProdutos().get(produto).getPreco();
+                            System.out.println("Item adicionado com sucesso! Deseja adicionar mais itens? [S/N]");
+                            opcao = scan.nextLine();
+                            if(opcao.equals("S") || opcao.equals("s")){
+                                controlador = true;
+                            }else if(opcao.equals("N") || opcao.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida. encerrando pedido...");
+                                controlador = false;
+                                
+                            }
                         }
                     }
                 }        
                 novoPedido.setValorTotal(valorTotal);
                 TP_POO.getMeusPedidos().add(novoPedido);
-                break;
+                //break;
             }else if(TP_POO.getClientesCadastrados().indexOf(cliente) == ( TP_POO.getClientesCadastrados().size()-1)){
                 System.out.println("Não existe cliente vínculado à esse cpf");
             }
@@ -421,6 +557,7 @@ public class Sistema {
         String novaDescricao;
         int opcao;
         String opcao2;
+        String resposta;
         
         System.out.println("Informe o id do pedido que deseja alterar: ");
         id = (scan.nextInt());
@@ -428,33 +565,57 @@ public class Sistema {
         
         for(Pedido pedido : TP_POO.getMeusPedidos()){
             if(pedido.getId() == id){
-                
-                System.out.println("O que você deseja editar no pedido:\n"
+                boolean controlador = true;
+                while(controlador){
+                    System.out.println("O que você deseja editar no pedido:\n"
                         + "1 - Descrição detalhada\n"
                         + "2 - Atualizar estado do pedido do pedido");
-                opcao = (scan.nextInt());
-                scan.nextLine();
-                switch (opcao) {
-                    case 1 -> {
+                    opcao = (scan.nextInt());
+                    scan.nextLine();
+                    switch (opcao) {
+                        case 1 -> {
 
-                        System.out.println("Insira a nova descrição: ");
-                        novaDescricao = (scan.nextLine());
-                        pedido.setDescricaoDetalhada(novaDescricao);
-                    }
-                    case 2 -> {
-                        System.out.println("Escolha o novo estado do pedido:\n"
-                                + "1 - Pedido a caminho\n"
-                                + "2 - Pedido entregue ");
-                        opcao2 = scan.nextLine();
-                        switch(opcao2){
-                            case "1" ->{
-                                pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[1]);
+                            System.out.println("Insira a nova descrição: ");
+                            novaDescricao = (scan.nextLine());
+                            pedido.setDescricaoDetalhada(novaDescricao);
+                            System.out.println("Descrição alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
                             }
-                            case "2" ->{
-                                pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[2]);
+                        }
+                        case 2 -> {
+                            System.out.println("Escolha o novo estado do pedido:\n"
+                                    + "1 - Pedido a caminho\n"
+                                    + "2 - Pedido entregue ");
+                            opcao2 = scan.nextLine();
+                            switch(opcao2){
+                                case "1" ->{
+                                    pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[1]);
+                                }
+                                case "2" ->{
+                                    pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[2]);
+                                }
+                                default ->{
+                                    System.out.println("Opção inválida.");   
+                                }
                             }
-                            default ->{
-                                System.out.println("Opção inválida.");   
+                            System.out.println("Descrição alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
                             }
                         }
                     }

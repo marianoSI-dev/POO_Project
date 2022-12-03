@@ -125,8 +125,5 @@ public class Pedido {
     public String toString() {
         return "\nPedido{"+"\nCPF do cliente =" + clienteCpf + "\nidPedido=" + id +"\ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
     }
-
-    
-    
     
 }

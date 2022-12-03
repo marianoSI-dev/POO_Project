@@ -32,6 +32,15 @@ public class TP_POO {
         clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
         
         //area de testes
+        
+        
+
+        Sistema.exibirClientes();
+        Sistema.editarCliente();
+        Sistema.exibirClientes();
+        //Sistema.exibirFuncionarios();
+        //Sistema.editarFuncionario();
+        //Sistema.exibirFuncionarios();
         //System.out.println(Pedido.getEstadosDoPedido()[2]);
         //Sistema.criarPedido();
         //Sistema.criarPedido();
@@ -39,7 +48,10 @@ public class TP_POO {
         //Sistema.editarPedido();
         //Sistema.deletarPedido();
         //System.out.println(getMeusPedidos());
-        
+        //Sistema.criarAdmistrador();
+        //Sistema.exibirAdminsitradores();
+        //Sistema.editarAdmistrador();
+        //Sistema.exibirAdminsitradores();
         //Sistema.menuFuncionario();
         //System.out.println(Arrays.toString(funcionariosCadastrados));
         //Sistema.editarFuncionario();
@@ -64,12 +76,15 @@ public class TP_POO {
         //System.out.println(getMeusPedidos());
         //Sistema.editarPedido();
         
-        
-        System.out.println(getMeusProdutos());
-        Sistema.deletarProduto();
-        System.out.println(getMeusProdutos());
-        Sistema.editarProduto();
-        System.out.println(getMeusProdutos());
+        //Sistema.criarPedido();
+        //System.out.println(getMeusPedidos());
+        //Sistema.editarPedido();
+        //System.out.println(getMeusPedidos());
+        //System.out.println(getMeusProdutos());
+        //Sistema.criarProduto();
+        //System.out.println(getMeusProdutos());
+        //Sistema.criarPedido();
+
         //System.out.println(getClientesCadastrados());
         //Sistema.deletarCliente();
         //System.out.println(getClientesCadastrados());
