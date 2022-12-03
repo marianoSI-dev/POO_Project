@@ -15,6 +15,7 @@ public class Sistema {
     public static void criarCliente(){
         Scanner scan = new Scanner(System.in);
         
+        System.out.println("----------CADASTRAR CLIENTE----------");
         Cliente novoCliente = new Cliente();
         System.out.println("Nome completo: ");
         novoCliente.setNome(scan.nextLine());
@@ -25,12 +26,12 @@ public class Sistema {
         System.out.println("CPF: ");
         novoCliente.setCpf(scan.nextLine());
         System.out.println("PEDIDO");
-        novoCliente.setPedido(criarPedido());
         TP_POO.getClientesCadastrados().add(novoCliente);
         System.out.println("Cliente cadastrado com sucesso");  
     }
     
     public static void exibirClientes(){
+        System.out.println("----------CLIENTE CADASTRADOS----------");
         System.out.println(TP_POO.getClientesCadastrados());
     }
     public static void editarCliente(){
@@ -106,7 +107,7 @@ public class Sistema {
     //CRUD FUNCIONARIO
     public static void criarFuncionario(){
         Scanner scan = new Scanner(System.in);
-        
+        System.out.println("----------CADASTRAR FUNCIONÁRIO----------");
         //conta quantas casas estão livres em meu array estatico
         int contador = 0;
         for(int i = 0; i < TP_POO.getFuncionariosCadastrados().length; i++){       
@@ -139,6 +140,7 @@ public class Sistema {
     }
     
     public static void exibirFuncionarios(){
+        System.out.println("----------FUNCIONÁRIOS CADASTRADOS----------");
         System.out.println(Arrays.toString(TP_POO.getFuncionariosCadastrados()));
     }
     public static void deletarFuncionario(){
@@ -217,6 +219,7 @@ public class Sistema {
     
     //CRUD Adminstrador:
     public static void criarAdmistrador(){
+        System.out.println("----------CADASTRAR ADMINISTRADOR----------");
         Scanner scan = new Scanner(System.in);
         
         Administrador novoAdmin = new Administrador();
@@ -234,14 +237,15 @@ public class Sistema {
         System.out.println("Novo Administrador cadastrado com sucesso");   
     }
     
-    public static void exbirAdminsitradores(){
+    public static void exibirAdminsitradores(){
+        System.out.println("----------ADMISTRADORES CADASTRADOS----------");
         System.out.println(TP_POO.getAdministradoresCadastrados());
     }
     public static void editarAdmistrador(){
         Scanner scan = new Scanner(System.in);
         String cpf;
         
-        System.out.println("Informe o CPF do admistrador que deseja editar:");
+        System.out.println("Informe o CPF do administrador que deseja editar:");
         cpf = (scan.nextLine());
         
         try {
@@ -314,90 +318,168 @@ public class Sistema {
         }
     } 
     
-    public static Pedido criarPedido(){
+    public static void criarPedido(){
         Scanner scan = new Scanner(System.in);
-        Pedido novoPedido = new Pedido();
         float valorTotal = 0;
         boolean controlador = true;
+        String cpfPedido;
+        Pedido novoPedido = new Pedido();
         
-        novoPedido.setId(TP_POO.getMeusPedidos().size());
-        novoPedido.setDataPedido(LocalDate.now());
-        novoPedido.setHorarioPedido(LocalTime.now());
-        novoPedido.setEstadoDoPedido("Em preparo");
-        novoPedido.setHorarioEntrega(LocalTime.now().plusHours(2));
-        System.out.println("Descrição Detalhada: ");
-        novoPedido.setDescricaoDetalhada(scan.nextLine());
         
-        while(controlador){
-            Integer produto;
-            
-            System.out.println("Adicionar produtos ao pedido:\n "
-                + "\n1 - Cachorro Quente"
-                + "                 2 - Beirute"
-                + "\n3 - Esfiha aberta de carne"
-                + "          4 - Mini Pizza"
-                + "\n5 - Hambúrguer"
-                + "                      6 - Esfiha aberta de queijo"
-                + "\n7 - Esfiha aberta de carne"
-                + "          8 - Refrigerante lata"
-                + "\n9 - Refrigerante 2 litros"
-                + "\n10 - ENCERRAR PEDIDO");
-            produto =(scan.nextInt());
-            switch(produto){
-                case 1 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(0)); 
-                    valorTotal +=TP_POO.getMeusProdutos().get(0).getPreco();
-                }
-                case 2 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(1));
-                    valorTotal +=TP_POO.getMeusProdutos().get(1).getPreco();
-                }
-                case 3 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(2));
-                    valorTotal +=TP_POO.getMeusProdutos().get(2).getPreco();
-                }
-                case 4 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(3));
-                    valorTotal +=TP_POO.getMeusProdutos().get(3).getPreco();
-                }
-                case 5 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(4));
-                    valorTotal +=TP_POO.getMeusProdutos().get(4).getPreco();
-                }
-                case 6 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(5));
-                    valorTotal +=TP_POO.getMeusProdutos().get(5).getPreco();
-                }
-                case 7 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(6));
-                    valorTotal +=TP_POO.getMeusProdutos().get(6).getPreco();
-                }
-                case 8 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(7));
-                    valorTotal +=TP_POO.getMeusProdutos().get(7).getPreco();
-                }
-                case 9 -> {
-                    novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(8));
-                    valorTotal +=TP_POO.getMeusProdutos().get(8).getPreco();
-                }
-                case 10 -> {
-                    controlador = false;
-                    break;   
-                }
-                default ->{
-                    System.out.println("Produto inexistente");   
-                }
+        System.out.println("----------CADASTRAR PEDIDO----------");
+        System.out.println("Insira o cpf do titular do pedido: ");
+        cpfPedido = scan.nextLine();
+        for(Cliente cliente : TP_POO.getClientesCadastrados()){
+            if(cliente.getCpf().equals(cpfPedido)){
+                novoPedido.setClienteCpf(cpfPedido);
+                novoPedido.setId(Pedido.getContador());
+                novoPedido.setDataPedido(LocalDate.now());
+                novoPedido.setHorarioPedido(LocalTime.now());
+                novoPedido.setEstadoDoPedido("Em preparo");
+                novoPedido.setHorarioEntrega(LocalTime.now().plusHours(2));
+                System.out.println("Descrição Detalhada: ");
+                novoPedido.setDescricaoDetalhada(scan.nextLine());
+
+                while(controlador){
+                    Integer produto;
+                    System.out.println("Adicionar produtos ao pedido:\n "
+                        + "\n1 - Cachorro Quente"
+                        + "                 2 - Beirute"
+                        + "\n3 - Esfiha aberta de carne"
+                        + "          4 - Mini Pizza"
+                        + "\n5 - Hambúrguer"
+                        + "                      6 - Esfiha aberta de queijo"
+                        + "\n7 - Esfiha aberta de carne"
+                        + "          8 - Refrigerante lata"
+                        + "\n9 - Refrigerante 2 litros"
+                        + "\n10 - ENCERRAR PEDIDO");
+                    produto =(scan.nextInt());
+                    switch(produto){
+                        case 1 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(0)); 
+                            valorTotal +=TP_POO.getMeusProdutos().get(0).getPreco();
+                        }
+                        case 2 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(1));
+                            valorTotal +=TP_POO.getMeusProdutos().get(1).getPreco();
+                        }
+                        case 3 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(2));
+                            valorTotal +=TP_POO.getMeusProdutos().get(2).getPreco();
+                        }
+                        case 4 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(3));
+                            valorTotal +=TP_POO.getMeusProdutos().get(3).getPreco();
+                        }
+                        case 5 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(4));
+                            valorTotal +=TP_POO.getMeusProdutos().get(4).getPreco();
+                        }
+                        case 6 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(5));
+                            valorTotal +=TP_POO.getMeusProdutos().get(5).getPreco();
+                        }
+                        case 7 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(6));
+                            valorTotal +=TP_POO.getMeusProdutos().get(6).getPreco();
+                        }
+                        case 8 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(7));
+                            valorTotal +=TP_POO.getMeusProdutos().get(7).getPreco();
+                        }
+                        case 9 -> {
+                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(8));
+                            valorTotal +=TP_POO.getMeusProdutos().get(8).getPreco();
+                        }
+                        case 10 -> {
+                            controlador = false;
+                            break;   
+                        }
+                        default ->{
+                            System.out.println("Produto inexistente");   
+                        }
+                    }
+                }        
+                novoPedido.setValorTotal(valorTotal);
+                TP_POO.getMeusPedidos().add(novoPedido);
+                break;
+            }else if(TP_POO.getClientesCadastrados().indexOf(cliente) == ( TP_POO.getClientesCadastrados().size()-1)){
+                System.out.println("Não existe cliente vínculado à esse cpf");
             }
         }
-        
-        novoPedido.setValorTotal(valorTotal);
-        TP_POO.getMeusPedidos().add(novoPedido);
-        return novoPedido;
     }
     public static void exibirPedidos(){
+        System.out.println("----------PEDIDOS FEITOS----------");
         System.out.println(TP_POO.getMeusPedidos());
     }
     
+    public static void editarPedido(){
+        Scanner scan = new Scanner(System.in);
+        
+        int id;
+        String cpf;
+        String novaDescricao;
+        int opcao;
+        String opcao2;
+        
+        System.out.println("Informe o id do pedido que deseja alterar: ");
+        id = (scan.nextInt());
+
+        
+        for(Pedido pedido : TP_POO.getMeusPedidos()){
+            if(pedido.getId() == id){
+                
+                System.out.println("O que você deseja editar no pedido:\n"
+                        + "1 - Descrição detalhada\n"
+                        + "2 - Atualizar estado do pedido do pedido");
+                opcao = (scan.nextInt());
+                scan.nextLine();
+                switch (opcao) {
+                    case 1 -> {
+
+                        System.out.println("Insira a nova descrição: ");
+                        novaDescricao = (scan.nextLine());
+                        pedido.setDescricaoDetalhada(novaDescricao);
+                    }
+                    case 2 -> {
+                        System.out.println("Escolha o novo estado do pedido:\n"
+                                + "1 - Pedido a caminho\n"
+                                + "2 - Pedido entregue ");
+                        opcao2 = scan.nextLine();
+                        switch(opcao2){
+                            case "1" ->{
+                                pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[1]);
+                            }
+                            case "2" ->{
+                                pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[2]);
+                            }
+                            default ->{
+                                System.out.println("Opção inválida.");   
+                            }
+                        }
+                    }
+                }
+            } 
+        }      
+    }
+    
+    public static void deletarPedido(){
+        Scanner scan = new Scanner(System.in);
+        int id;
+        
+        System.out.println("Informe o id do pedido que deseja excluir:");
+        id = (scan.nextInt());
+        try{
+            for(Pedido pedido : TP_POO.getMeusPedidos()){
+                if(pedido.getId()==id){
+                    TP_POO.getMeusPedidos().remove(pedido);
+                    System.out.println("Pedido removido com sucesso.");
+                }
+            }
+        }catch(RuntimeException e){
+            e.getMessage();
+        }
+    } 
     
     
     
@@ -405,7 +487,7 @@ public class Sistema {
         Scanner scan = new Scanner(System.in);
         Produto novoProduto = new Produto();
         
-        
+        novoProduto.setId(Produto.getContador());
         System.out.println("Nome do produto: ");
         novoProduto.setNomeProduto(scan.nextLine());
         System.out.println("Ingredientes: ");
@@ -420,8 +502,141 @@ public class Sistema {
     }
     public static void exibirProdutos(){
         System.out.println(TP_POO.getMeusProdutos());
+    }  
+    
+    public static void editarProduto(){
+        Scanner scan = new Scanner(System.in);
+        int opcao;
+        int id;
+        String resposta;
+        
+        System.out.println("Informe o id do produto que deseja alterar: ");
+        id = (scan.nextInt());
+
+        
+        for(Produto produto : TP_POO.getMeusProdutos()){
+            if(produto.getId() == id){
+                boolean controlador = true;
+                while(controlador){
+                    System.out.println("O que você deseja editar no produto:\n"
+                        + "1 - Editar nome do produto\n"
+                        + "2 - Editar ingredientes do produto\n"
+                        + "3 - Editar descrição detalhada\n"
+                        + "4 - Editar preço do produto");
+                    opcao = (scan.nextInt());
+                    scan.nextLine();
+                    switch (opcao){
+                        
+                        case 1 -> {
+                            String novoNome;
+                            System.out.println("Insira o novo nome do produto: ");
+                            novoNome = (scan.nextLine());
+                            produto.setNomeProduto(novoNome);
+                            System.out.println("Nome alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
+                            }
+                        }
+                        case 2 -> {
+                            String novosIngredientes;
+                            System.out.println("Insira os novos ingredientes do produto: ");
+                            novosIngredientes = (scan.nextLine());
+                            produto.setIngredientes(novosIngredientes);
+                            System.out.println("Ingredientes alterados com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
+                            }
+                        }
+                        case 3 -> {
+                            String novaDescricao;
+                            System.out.println("Insira a nova descrição do produto: ");
+                            novaDescricao = (scan.nextLine());
+                            produto.setDescricaoProduto(novaDescricao);
+                            System.out.println("Descrição alterada com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
+                            }
+                        }
+                        case 4 -> {
+                            float novoPreco;
+                            System.out.println("Insira o novo preço do produto: ");
+                            novoPreco = (scan.nextFloat());
+                            produto.setPreco(novoPreco);
+                            System.out.println("Preço alterado com sucesso!\n"
+                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                            scan.nextLine();
+                            resposta = (scan.nextLine());
+                            if(resposta.equals("S")||resposta.equals("s")){
+                                controlador = true;
+                            }else if(resposta.equals("N")||resposta.equals("n")){
+                                controlador = false;
+                            }else{
+                                System.out.println("Opção inválida");
+                                controlador = false;
+                            }
+                        } 
+                        default ->{
+                            System.out.println("Não foi encontrada a opção");
+                        }
+                    }
+                }     
+            }
+        }      
     }
     
+    public static void deletarProduto(){
+        Scanner scan = new Scanner(System.in);
+        int id;
+        
+        System.out.println("Informe o id do produto que deseja excluir:");
+        id = (scan.nextInt());
+        try{
+            for(Produto produto : TP_POO.getMeusProdutos()){
+                if(produto.getId()==id){
+                    TP_POO.getMeusProdutos().remove(produto);
+                    System.out.println("Pedido removido com sucesso.");
+                }
+            }
+        }catch(RuntimeException e){
+            e.getMessage();
+        }
+    }
     
-   
+    public static void menuFuncionario(){
+        System.out.println("\nDigite somente o número da opção desejada:"
+                + "\n\n1 - Cadastrar Clientes");
+        Scanner scan = new Scanner(System.in);
+        String opc = scan.nextLine();
+
+        switch (opc) {
+            case "1":
+                Sistema.criarCliente();
+                Sistema.menuFuncionario();
+                break;
+            default:
+                System.out.println((char) 27 + "[31m\nOpção invalida\u001B[0m");
+                Sistema.menuFuncionario();
+        }
+    }
 }

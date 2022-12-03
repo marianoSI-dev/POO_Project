@@ -2,12 +2,15 @@ package com.mycompany.tp_poo;
 
 
 public class Produto {
+    private static int contador = 8;
+    private int id;
     private String nomeProduto;
     private String ingredientes;
     private String descricaoProduto;
     private float preco;
 
-    public Produto( String nomeProduto, String ingredientes, String descricaoProduto, float preco) {
+    public Produto( int id, String nomeProduto, String ingredientes, String descricaoProduto, float preco) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
         this.ingredientes = ingredientes;
         this.descricaoProduto = descricaoProduto;
@@ -15,7 +18,27 @@ public class Produto {
     }
     
     public Produto(){
+        contador++;
     }
+
+    public static int getContador() {
+        return contador;
+    }
+
+    public static void setContador(int contador) {
+        Produto.contador = contador;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
     
     public String getNomeProduto() {
         return nomeProduto;
@@ -51,7 +74,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "\nProduto{" + "\nnomeProduto=" + nomeProduto + ", \ningredientes=" + ingredientes + ", \ndescricaoProduto=" + descricaoProduto + ", \npreco=" + preco + '}';
+        return "\nProduto{" + "\nID do produto=" + id +" \nnomeProduto=" + nomeProduto + ", \ningredientes=" + ingredientes + ", \ndescricaoProduto=" + descricaoProduto + ", \npreco=" + preco + '}';
     }
     
     

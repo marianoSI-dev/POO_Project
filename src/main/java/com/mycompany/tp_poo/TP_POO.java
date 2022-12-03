@@ -17,43 +17,63 @@ public class TP_POO {
         funcionariosCadastrados[1] = new Funcionario("Cláudia Brenda Figueiredo","(38) 99828-1917","Rua Da Glória, 210, Centro","679.717.286-11","QIjscSsm3U");
 
         
-        meusProdutos.add(new Produto("Cachorro Quente", "Pão, Salcicha, Batata-palha","Delicioso cachorro quente", (float) 12.00));
-        meusProdutos.add(new Produto("Beirute", "Pão Sírio, Bacon, Filé Mignon, Presunto, Requeijão Cremoso, Queijo prato, Tomate, Alface, Maionese","Receita árabe, batata-palha opcional", (float) 25.00));
-        meusProdutos.add(new Produto("Esfiha aberta de carne", "Carne moída, Tomate, Cebola, Pimenta","Receita árabe, pimenta opcional", (float) 7.50));
-        meusProdutos.add(new Produto("Mini Pizza", "Calabresa, Mussarela, Orégano, Tomate","Ketchup e maionese como acompanhamento", (float) 6.00));
-        meusProdutos.add(new Produto("Hambúrguer", "Bife, Alface, Tomate, Queijo, Batata palha, Presunto","Ketchup e maionese como acompanhamento", (float) 10.00));
-        meusProdutos.add(new Produto("Esfiha aberta de queijo", "Queijo parmesão, orégano tomate","Receita árabe, tomate é opcional", (float) 7.00));
-        meusProdutos.add(new Produto("Esfiha aberta de carne", "Carne moída, queijo parmesão, orégano, tomate","Receita árabe, tomate é opcional", (float) 9.00));
-        meusProdutos.add(new Produto("Refrigerante lata", "Item industrializado","Coca-cola 350ml", (float) 3.50));
-        meusProdutos.add(new Produto("Refrigerante 2 litros", "Item industrializado","Fanta 2 litros", (float) 10.00));
+        meusProdutos.add(new Produto(0,"Cachorro Quente", "Pão, Salcicha, Batata-palha","Delicioso cachorro quente", (float) 12.00));
+        meusProdutos.add(new Produto(1,"Beirute", "Pão Sírio, Bacon, Filé Mignon, Presunto, Requeijão Cremoso, Queijo prato, Tomate, Alface, Maionese","Receita árabe, batata-palha opcional", (float) 25.00));
+        meusProdutos.add(new Produto(2,"Esfiha aberta de carne", "Carne moída, Tomate, Cebola, Pimenta","Receita árabe, pimenta opcional", (float) 7.50));
+        meusProdutos.add(new Produto(3,"Mini Pizza", "Calabresa, Mussarela, Orégano, Tomate","Ketchup e maionese como acompanhamento", (float) 6.00));
+        meusProdutos.add(new Produto(4,"Hambúrguer", "Bife, Alface, Tomate, Queijo, Batata palha, Presunto","Ketchup e maionese como acompanhamento", (float) 10.00));
+        meusProdutos.add(new Produto(5, "Esfiha aberta de queijo", "Queijo parmesão, orégano tomate","Receita árabe, tomate é opcional", (float) 7.00));
+        meusProdutos.add(new Produto(6,"Esfiha aberta de carne", "Carne moída, queijo parmesão, orégano, tomate","Receita árabe, tomate é opcional", (float) 9.00));
+        meusProdutos.add(new Produto(7,"Refrigerante lata", "Item industrializado","Coca-cola 350ml", (float) 3.50));
+        meusProdutos.add(new Produto(8,"Refrigerante 2 litros", "Item industrializado","Fanta 2 litros", (float) 10.00));
         
-        //clientesCadastrados.add(new Cliente("Mariano","88539207","Avenida do Contorno", "13904696629"));
-        //clientesCadastrados.add(new Cliente("Rubenns","123123412","Avenida do blabla", "23151212412121"));
-        //clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
+        clientesCadastrados.add(new Cliente("Mariano","88539207","Avenida do Contorno", "13904696629"));
+        clientesCadastrados.add(new Cliente("Rubenns","123123412","Avenida do blabla", "23151212412121"));
+        clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
         
         //area de testes
+        //System.out.println(Pedido.getEstadosDoPedido()[2]);
+        //Sistema.criarPedido();
+        //Sistema.criarPedido();
+        //System.out.println(getMeusPedidos());
+        //Sistema.editarPedido();
+        //Sistema.deletarPedido();
+        //System.out.println(getMeusPedidos());
         
+        //Sistema.menuFuncionario();
         //System.out.println(Arrays.toString(funcionariosCadastrados));
         //Sistema.editarFuncionario();
         //System.out.println(Arrays.toString(funcionariosCadastrados));
         //Sistema.criarCliente();
         //Sistema.criarPedido();
-        Sistema.criarPedido();
-        Sistema.criarPedido();
+        //Sistema.criarPedido();
+        //Sistema.criarPedido();
+        //Sistema.criarPedido();
         //System.out.println(getClientesCadastrados());
-        System.out.println(getMeusPedidos());
+        //System.out.println(getMeusPedidos());
+        //System.out.println(getMeusPedidos());
         //System.out.println(getAdministradoresCadastrados());
         //Sistema.criarAdmistrador();
         //Sistema.criarAdmistrador();
         //Sistema.deletarAdministrador();
         //System.out.println(getAdministradoresCadastrados());
+        //Sistema.criarProduto();
         
+        //Sistema.criarPedido();
+        //Sistema.criarPedido();
+        //System.out.println(getMeusPedidos());
+        //Sistema.editarPedido();
+        
+        
+        System.out.println(getMeusProdutos());
+        Sistema.deletarProduto();
+        System.out.println(getMeusProdutos());
+        Sistema.editarProduto();
+        System.out.println(getMeusProdutos());
         //System.out.println(getClientesCadastrados());
         //Sistema.deletarCliente();
         //System.out.println(getClientesCadastrados());
-        
-        
-        
+
         //Sistema.editarCliente();
         
        // Sistema.criarProduto();

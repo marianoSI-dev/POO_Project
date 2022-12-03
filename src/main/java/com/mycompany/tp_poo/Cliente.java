@@ -1,13 +1,12 @@
 
 package com.mycompany.tp_poo;
-import java.util.ArrayList;
+
 
 public class Cliente {
     private String nome;
     private String telefone;
     private String endereco;
     private String cpf;
-    private Pedido pedido = new Pedido();
     
     //questao 10a
     private static int numClientes = 0;
@@ -18,12 +17,14 @@ public class Cliente {
     public static int getNumClientes(){
         return numClientes;
     }
+
     public Cliente(String nome, String telefone, String endereco, String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.cpf = cpf;
     }
+    
    
     public String getNome() {
         return nome;
@@ -57,17 +58,10 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido Pedidos) {
-        this.pedido = Pedidos;
-    } 
 
     @Override
     public String toString() {
-        return "\nCliente{" + "\nnome=" + nome + ", \ntelefone=" + telefone + ", \nendereco=" + endereco + ", \ncpf=" + cpf + ", \nultimosPedidos=" + pedido +'\n'+'}';
+        return "\nCliente{" + "\nnome=" + nome + ", \ntelefone=" + telefone + ", \nendereco=" + endereco + ", \ncpf=" + cpf + '\n'+'}';
     }
 
     
