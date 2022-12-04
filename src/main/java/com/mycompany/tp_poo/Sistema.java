@@ -4,7 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Scanner;
-
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Sistema {
 
@@ -13,8 +20,7 @@ public class Sistema {
     
     //CRUD CLIENTE
     public static void criarCliente(){
-        Scanner scan = new Scanner(System.in);
-        
+        Scanner scan = new Scanner(System.in);        
         System.out.println("----------CADASTRAR CLIENTE----------");
         Cliente novoCliente = new Cliente();
         System.out.println("Nome completo: ");
@@ -458,8 +464,7 @@ public class Sistema {
                                 }
                             }
                         }
-                    }
-                    
+                    }              
                 }
             }
         }
@@ -783,7 +788,7 @@ public class Sistema {
             e.getMessage();
         }
     }
-    
+        
     public static void menuFuncionario(){
         System.out.println("\nDigite somente o número da opção desejada:"
                 + "\n\n1 - Cadastrar Clientes");

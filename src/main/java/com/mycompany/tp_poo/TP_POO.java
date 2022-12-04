@@ -1,20 +1,21 @@
 package com.mycompany.tp_poo;
 
 import java.util.ArrayList;
+
+import com.google.gson.*;
 import java.util.Arrays;
 
 
 public class TP_POO {
 
-    private static final Funcionario funcionariosCadastrados[] = new Funcionario[15];
-    private static final ArrayList<Cliente> clientesCadastrados = new ArrayList<>();
-    private static final ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
-    private static final ArrayList<Pedido> meusPedidos = new ArrayList<>();
-    private static final ArrayList<Produto> meusProdutos = new ArrayList<>();
+    private static Funcionario funcionariosCadastrados[] = new Funcionario[15];
+    private static ArrayList<Cliente> clientesCadastrados = new ArrayList<>();
+    private static ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
+    private static ArrayList<Pedido> meusPedidos = new ArrayList<>();
+    private static ArrayList<Produto> meusProdutos = new ArrayList<>();
     
     public static void main(String[] args) throws Exception {
-        funcionariosCadastrados[0] = new Funcionario("Ana Malu Lorena Nunes","(38) 98383-9442","Rua Do Amparo, 710, Centro","190.880.226-07","bCp4xWgsdu");
-        funcionariosCadastrados[1] = new Funcionario("Cláudia Brenda Figueiredo","(38) 99828-1917","Rua Da Glória, 210, Centro","679.717.286-11","QIjscSsm3U");
+        
 
         
         meusProdutos.add(new Produto(0,"Cachorro Quente", "Pão, Salcicha, Batata-palha","Delicioso cachorro quente", (float) 12.00));
@@ -32,12 +33,22 @@ public class TP_POO {
         clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
         
         //area de testes
+        HandlerJson.openAndReadJson();
+        //System.out.println("TESTE 1");
+        //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
+        //System.out.println(getAdministradoresCadastrados());
+        //System.out.println("TESTE 2");
+        //Sistema.criarAdmistrador();
+        //Sistema.exitAndSaveToJSON();
+        //Sistema.openAndReadJson();
+        //System.out.println(getAdministradoresCadastrados());
         
         
-
-        Sistema.exibirClientes();
-        Sistema.editarCliente();
-        Sistema.exibirClientes();
+        //Sistema.criarAdmistrador();
+        //Sistema.exitAndSaveToJSON();
+        //Sistema.exibirClientes();
+        //Sistema.editarCliente();
+        //Sistema.exibirClientes();
         //Sistema.exibirFuncionarios();
         //Sistema.editarFuncionario();
         //Sistema.exibirFuncionarios();
@@ -122,7 +133,26 @@ public class TP_POO {
     public static ArrayList<Administrador> getAdministradoresCadastrados() {
         return administradoresCadastrados;
     }
-    
+
+    public static void setAdministradoresCadastrados(ArrayList<Administrador> administradoresCadastrados) {
+        TP_POO.administradoresCadastrados = administradoresCadastrados;
+    }
+
+    public static void setFuncionariosCadastrados(Funcionario[] funcionariosCadastrados) {
+        TP_POO.funcionariosCadastrados = funcionariosCadastrados;
+    }
+
+    public static void setClientesCadastrados(ArrayList<Cliente> clientesCadastrados) {
+        TP_POO.clientesCadastrados = clientesCadastrados;
+    }
+
+    public static void setMeusPedidos(ArrayList<Pedido> meusPedidos) {
+        TP_POO.meusPedidos = meusPedidos;
+    }
+
+    public static void setMeusProdutos(ArrayList<Produto> meusProdutos) {
+        TP_POO.meusProdutos = meusProdutos;
+    }
     
     
 }

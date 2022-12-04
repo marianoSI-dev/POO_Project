@@ -9,20 +9,20 @@ public class Pedido {
     private int id;
     private static String[] estadosDoPedido = {"Pedido em preparo", "Pedido a caminho", "Pedido entregue"};
     private String clienteCpf;
-    private LocalDate dataPedido;
-    private LocalTime horarioPedido;
+    private String dataPedido;
+    private String horarioPedido;
     private String estadoDoPedido;
-    private LocalTime horarioEntrega;
+    private String horarioEntrega;
     private String descricaoDetalhada;
     private float valorTotal;
     private ArrayList<Produto> itensDoPedido = new ArrayList();
 
     public Pedido(String cpf, String estadoDoPedido, LocalTime horarioEntrega, String descricaoDetalhada, float valorTotal) {  
         this.clienteCpf = cpf;
-        this.dataPedido =  LocalDate.now();
-        this.horarioPedido = LocalTime.now();
+        this.dataPedido =  LocalDate.now().toString();
+        this.horarioPedido = LocalTime.now().toString();
         this.estadoDoPedido = this.estadosDoPedido[0];
-        this.horarioEntrega = LocalTime.now().plusHours(2);
+        this.horarioEntrega = LocalTime.now().plusHours(2).toString();
         this.descricaoDetalhada = descricaoDetalhada;
         this.valorTotal = valorTotal;
     }
