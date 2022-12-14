@@ -2,7 +2,7 @@ package com.mycompany.tp_poo;
 
 
 public class Produto {
-    private static int contador = 8;
+    private static int contador = TP_POO.getMeusProdutos().size();
     private int id;
     private String nomeProduto;
     private String ingredientes;

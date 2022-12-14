@@ -4,14 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Scanner;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 public class Sistema {
 
@@ -506,10 +499,10 @@ public class Sistema {
             if(cliente.getCpf().equals(cpfPedido)){
                 novoPedido.setClienteCpf(cpfPedido);
                 novoPedido.setId(Pedido.getContador());
-                novoPedido.setDataPedido(LocalDate.now());
-                novoPedido.setHorarioPedido(LocalTime.now());
+                novoPedido.setDataPedido(LocalDate.now().toString());
+                novoPedido.setHorarioPedido(LocalTime.now().toString());
                 novoPedido.setEstadoDoPedido("Em preparo");
-                novoPedido.setHorarioEntrega(LocalTime.now().plusHours(2));
+                novoPedido.setHorarioEntrega(LocalTime.now().plusHours(2).toString());
                 System.out.println("Descrição Detalhada: ");
                 novoPedido.setDescricaoDetalhada(scan.nextLine());
 
@@ -788,8 +781,75 @@ public class Sistema {
             e.getMessage();
         }
     }
+    
+    public static void login(){
         
+        Scanner scan = new Scanner(System.in);
+        String cpf;
+        String senha;
+        String opcao;
+        
+        System.out.println("\n---------- SEJA BEM VINDO ----------\n");
+        System.out.println("Logar como\n"
+                + "Adminstrador -> Digite 1\n"
+                + "Funcionário  -> Digite 2");
+        System.out.println("Opção: ");
+        opcao = scan.nextLine();
+        
+        switch(opcao){
+            case "1" -> {
+                System.out.println("\n---------- Login como Administrador ----------\n");
+                System.out.println("CPF: ");
+                cpf = scan.nextLine();
+                for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
+                    if(admin.getCfp().equals(cpf)){
+                        System.out.println("Olá "+ admin.getNome());
+                        System.out.println("Digite sua senha: ");
+                        senha = scan.nextLine();
+                        if(admin.getSenha().equals(senha)){
+                            menuAdmin();
+                        }else{
+                            System.out.println("Senha incorreta.");
+                            login();
+                            break;
+                        }                
+                    }else{
+                        System.out.println("O CPF informado não foi localizado em nossa base de dados");
+                        login();
+                    }
+                    break;
+                }
+                
+            }
+            case "2" -> {
+                System.out.println("\n---------- Login como Funcionário ----------\n");
+                System.out.println("CPF: ");
+                cpf = scan.nextLine();
+                for(Funcionario funcionario : TP_POO.getFuncionariosCadastrados()){
+                    if(funcionario != null && funcionario.getCfp().equals(cpf) ){
+                        System.out.println("Olá "+ funcionario.getNome());
+                        System.out.println("Digite sua senha: ");
+                        senha = scan.nextLine();
+                        if(funcionario.getSenha().equals(senha)){
+                            menuFuncionario();
+                        }else{
+                            System.out.println("Senha incorreta.");
+                            login();
+                        }
+                        break;
+                    }                  
+                }
+                System.out.println("O CPF informado não foi localizado em nossa base de dados");
+                login();
+            }
+            default ->{
+                System.out.println("Não foi encontrada a opção");
+                login();
+            }
+        }          
+    }
     public static void menuFuncionario(){
+        System.out.println("\n---------- Menu Funcionário ----------\n");
         System.out.println("\nDigite somente o número da opção desejada:"
                 + "\n\n1 - Cadastrar Clientes");
         Scanner scan = new Scanner(System.in);
@@ -805,4 +865,10 @@ public class Sistema {
                 Sistema.menuFuncionario();
         }
     }
+    
+    public static void menuAdmin(){
+        System.out.println("\n---------- Menu Administrador ----------\n");
+    }
 }
+
+ 

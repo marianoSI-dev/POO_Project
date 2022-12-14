@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Pedido {
-    private static int contador;
+    private static int contador = TP_POO.getMeusPedidos().size();
     private int id;
     private static String[] estadosDoPedido = {"Pedido em preparo", "Pedido a caminho", "Pedido entregue"};
     private String clienteCpf;
@@ -63,19 +63,19 @@ public class Pedido {
         this.clienteCpf = clienteCpf;
     }
 
-    public LocalDate getDataPedido() {
+    public String getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(LocalDate dataPedido) {
+    public void setDataPedido(String dataPedido) {
         this.dataPedido = dataPedido;
     }
 
-    public LocalTime getHorarioPedido() {
+    public String getHorarioPedido() {
         return horarioPedido;
     }
 
-    public void setHorarioPedido(LocalTime horarioPedido) {
+    public void setHorarioPedido(String horarioPedido) {
         this.horarioPedido = horarioPedido;
     }
 
@@ -87,11 +87,11 @@ public class Pedido {
         this.estadoDoPedido = estadoDoPedido;
     }
 
-    public LocalTime getHorarioEntrega() {
+    public String getHorarioEntrega() {
         return horarioEntrega;
     }
 
-    public void setHorarioEntrega(LocalTime horarioEntrega) {
+    public void setHorarioEntrega(String horarioEntrega) {
         this.horarioEntrega = horarioEntrega;
     }
 

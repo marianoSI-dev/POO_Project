@@ -34,6 +34,7 @@ public class TP_POO {
         
         //area de testes
         HandlerJson.openAndReadJson();
+        Sistema.login();
         //System.out.println("TESTE 1");
         //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
         //System.out.println(getAdministradoresCadastrados());
