@@ -13,6 +13,7 @@ public class TP_POO {
     private static ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
     private static ArrayList<Pedido> meusPedidos = new ArrayList<>();
     private static ArrayList<Produto> meusProdutos = new ArrayList<>();
+    private static ArrayList<Ids> productsIds = new ArrayList<>();
     
     public static void main(String[] args) throws Exception {
         
@@ -35,7 +36,8 @@ public class TP_POO {
         //area de testes
 
         //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
-        Sistema.menuAdmin();
+        //Sistema.menuAdmin();
+        System.out.println(Sistema.createId());
         //System.out.println("TESTE 1");
         //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
         //System.out.println(getAdministradoresCadastrados());

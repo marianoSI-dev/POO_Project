@@ -3,8 +3,11 @@ package com.mycompany.tp_poo;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
+
 
 
 public class Sistema {
@@ -345,7 +348,7 @@ public class Sistema {
     }
     
     //CRUD Adminstrador:
-    public static void criarAdmistrador(){
+    public static void criarAdministrador(){
         System.out.println("----------CADASTRAR ADMINISTRADOR----------");
         Scanner scan = new Scanner(System.in);
         
@@ -553,6 +556,7 @@ public class Sistema {
                         if(produtoEscolhido.getId() == produto){
                             novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(produto)); 
                             valorTotal +=TP_POO.getMeusProdutos().get(produto).getPreco();
+                            HandlerJson.saveToJSON();
                             System.out.println("Item adicionado com sucesso! Deseja adicionar mais itens? [S/N]");
                             opcao = scan.nextLine();
                             if(opcao.equals("S") || opcao.equals("s")){
@@ -574,6 +578,7 @@ public class Sistema {
                 System.out.println("Não existe cliente vínculado à esse cpf");
             }
         }
+        HandlerJson.saveToJSON();
     }
     public static void exibirPedidos(){
         System.out.println("----------PEDIDOS FEITOS----------");
@@ -916,20 +921,25 @@ public class Sistema {
                 + "\n7 -  Listar funcionários"
                 + "\n8 -  Editar funcionário"
                 +"\n"
+                +"\nREFERENTES AOS PEDIDOS: "
+                + "\n9 -  Cadastrar novo pedido"
+                + "\n10 - Remover pedido"
+                + "\n11 - Listar produtos pedidos"
+                + "\n12 - Editar pedido"
+                +"\n"
                 +"\nREFERENTES AOS PRODUTOS DA LANCHONETE: "
-                + "\n9 -  Cadastrar novo produto"
-                + "\n10 - Remover produto"
-                + "\n11 - Listar produtos disponíveis"
-                + "\n12 - Editar produto"
-                + "\n"
+                + "\n13 - Cadastrar novo produto"
+                + "\n14 - Remover produto"
+                + "\n15 - Listar produtos disponíveis"
+                + "\n16 - Editar produto"
                 +"\n"
                 +"\nREFERENTES AO PERFIL DE ADMINISTRADOR: "
-                +"\n13 - Cadastrar novo Adminstrador"
-                +"\n14 - Editar meu perfil de Administrador"
-                +"\n15 - Listar todos os Administradores"
-                +"\n16 - Remover Administrador"
+                +"\n17 - Cadastrar novo Adminstrador"
+                +"\n18 - Editar meu perfil de Administrador"
+                +"\n19 - Listar todos os Administradores"
+                +"\n20 - Remover Administrador"
                 + "\n"
-                + "\n17 - Encerrar");
+                + "\n21 - Encerrar");
                 
         System.out.println("Digite a opção desejada: ");
         opcaoDoSistema = scan.nextLine();
@@ -966,35 +976,46 @@ public class Sistema {
                 editarFuncionario();
                 continuarNoSistema();
             }
-            case "9" ->{
+            case "9"->{
+
+            }
+            case "10"->{
+            }
+            case "11"->{
+            
+            }
+            case "12"->{
+            
+            }
+            case "13" ->{
                 criarProduto();
                 continuarNoSistema();
             }
-            case "10"->{
+            case "14"->{
                 deletarProduto();
                 continuarNoSistema();
             }
-            case "11"->{
+            case "15"->{
                 exibirProdutos();
                 continuarNoSistema();
             }
-            case "12"->{
+            case "16"->{
                 editarProduto();
                 continuarNoSistema();
             }
-            case "13"->{
-                criarAdmistrador();
+            case "17"->{
+                criarAdministrador();
                 continuarNoSistema();
             }
-            case "14" ->{
+            case "18" ->{
                 editarAdministrador();
                 continuarNoSistema();
             }
-            case "15"->{
+            case "19"->{
                 exibirAdministradores();
                 continuarNoSistema();
             }
-            case "16"->{
+            case "20"->{
                 deletarAdministrador();
                 continuarNoSistema();
             }
