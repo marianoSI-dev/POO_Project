@@ -547,7 +547,8 @@ public class Sistema {
                     System.out.println("Adicionar produtos ao pedido:\n ");
                     for(Produto produtos : TP_POO.getMeusProdutos()){
                         System.out.println(produtos.getId() +" - "+ produtos.getNomeProduto());
-                    }                   
+                    }
+                    System.out.println("Insira o código do produto que será adicionado ao pedido:");
                     produto =(scan.nextInt());
                     scan.nextLine();
                     for(Produto produtoEscolhido : TP_POO.getMeusProdutos()){
@@ -679,7 +680,22 @@ public class Sistema {
     } 
     
     
-    
+    public static void criarId() throws IOException{
+        HandlerJson.openAndReadJson();
+        Random random = new Random();
+        
+        ArrayList<Integer> lista = new ArrayList<Integer>();
+        for(int i=0; i<TP_POO.getMeusProdutos().size(); i++){
+            lista.add(TP_POO.getMeusProdutos().get(i).getId());
+        }
+        Integer numero = random.nextInt(15);
+        while(lista.contains(numero)){
+            numero = random.nextInt(15);
+        }
+        
+        System.out.println(lista);
+        System.out.println(numero);
+    }
     public static Produto criarProduto(){
         Scanner scan = new Scanner(System.in);
         Produto novoProduto = new Produto();
