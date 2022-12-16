@@ -33,8 +33,9 @@ public class TP_POO {
         clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
         
         //area de testes
-        HandlerJson.openAndReadJson();
-        Sistema.login();
+
+        //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
+        Sistema.menuAdmin();
         //System.out.println("TESTE 1");
         //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
         //System.out.println(getAdministradoresCadastrados());

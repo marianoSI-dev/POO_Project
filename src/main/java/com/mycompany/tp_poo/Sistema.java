@@ -1,5 +1,6 @@
 package com.mycompany.tp_poo;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -24,13 +25,14 @@ public class Sistema {
         novoCliente.setEndereco(scan.nextLine());
         System.out.println("CPF: ");
         novoCliente.setCpf(scan.nextLine());
-        System.out.println("PEDIDO");
-        TP_POO.getClientesCadastrados().add(novoCliente);
+        TP_POO.getClientesCadastrados().add(novoCliente);      
         System.out.println("Cliente cadastrado com sucesso");  
+        HandlerJson.saveToJSON();
     }
     
     public static void exibirClientes(){
-        System.out.println("----------CLIENTE CADASTRADOS----------");
+        System.out.println("----------CLIENTES CADASTRADOS----------");
+        System.out.println("Quantidade total: "+ TP_POO.getClientesCadastrados().size()+ " clientes cadastrados no sistema.");
         System.out.println(TP_POO.getClientesCadastrados());
     }
     public static void editarCliente(){
@@ -60,8 +62,9 @@ public class Sistema {
                                 System.out.println("Insira o novo nome: ");
                                 novoNome = (scan.nextLine());
                                 cliente.setNome(novoNome);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Nome alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no perfil do cliente? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -77,8 +80,9 @@ public class Sistema {
                                 System.out.println("Insira o novo telefone: ");
                                 novoTelefone = (scan.nextLine());
                                 cliente.setTelefone(novoTelefone);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Telefone alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no perfil do cliente? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -94,8 +98,9 @@ public class Sistema {
                                 System.out.println("Insira o novo endereço: ");
                                 novoEndereco = (scan.nextLine());
                                 cliente.setEndereco(novoEndereco);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Endereço alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no perfil do cliente? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -111,8 +116,9 @@ public class Sistema {
                                 System.out.println("Insira o novo cpf: ");
                                 novoCpf = (scan.nextLine());
                                 cliente.setCpf(novoCpf);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Senha alterada com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no perfil do cliente? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -145,11 +151,13 @@ public class Sistema {
                 if(cliente.getCpf().equals(cpf)){
                     TP_POO.getClientesCadastrados().remove(cliente);
                     System.out.println("Cliente removido com sucesso");
+                    HandlerJson.saveToJSON();
                 }
             }
         }catch(RuntimeException e){
             e.getMessage();
         }
+        HandlerJson.saveToJSON();
     } 
     
     //CRUD FUNCIONARIO
@@ -180,11 +188,13 @@ public class Sistema {
             if(TP_POO.getFuncionariosCadastrados()[i]== null)
             {   
                 TP_POO.getFuncionariosCadastrados()[i]= novoFuncionario;
+                HandlerJson.saveToJSON();
                 break;
             } 
         }}else{
             System.out.println("Número máximo de funcionarios cadsatrados atingido. Tente remover algum antes de tentar novamente.");
-        }   
+        }
+        HandlerJson.saveToJSON();
     }
     
     public static void exibirFuncionarios(){
@@ -199,12 +209,17 @@ public class Sistema {
         cpf = (scan.nextLine());
       
         for(int i = 0; i < TP_POO.getFuncionariosCadastrados().length; i++){
-            if(TP_POO.getFuncionariosCadastrados()[i].getCfp().equals(cpf)){   
-                TP_POO.getFuncionariosCadastrados()[i] = null;
-                System.out.println("Funcionário removido com sucesso!");
+            
+            if(TP_POO.getFuncionariosCadastrados()[i] != null){
+                if(  TP_POO.getFuncionariosCadastrados()[i].getCfp().equals(cpf)){   
+                    TP_POO.getFuncionariosCadastrados()[i] = null;
+                    System.out.println("Funcionário removido com sucesso!");
+                    HandlerJson.saveToJSON();
                 break;
+                }
             }
         }
+        HandlerJson.saveToJSON();
     }
     public static void editarFuncionario(){
         Scanner scan = new Scanner(System.in);
@@ -234,8 +249,9 @@ public class Sistema {
                                 System.out.println("Insira o novo nome: ");
                                 novoNome = (scan.nextLine());
                                 funcionario.setNome(novoNome);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Nome alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -251,8 +267,9 @@ public class Sistema {
                                 System.out.println("Insira o novo telefone: ");
                                 novoTelefone = (scan.nextLine());
                                 funcionario.setTelefone(novoTelefone);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Telefone alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -268,8 +285,9 @@ public class Sistema {
                                 System.out.println("Insira o novo endereço: ");
                                 novoEndereco = (scan.nextLine());
                                 funcionario.setEndereco(novoEndereco);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Endereço alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -285,8 +303,9 @@ public class Sistema {
                                 System.out.println("Insira o novo cpf: ");
                                 novoCpf = (scan.nextLine());
                                 funcionario.setCfp(novoCpf);
+                                HandlerJson.saveToJSON();
                                 System.out.println("CPF alterado com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -302,8 +321,9 @@ public class Sistema {
                                 System.out.println("Insira a nova senha: ");
                                 novaSenha = (scan.nextLine());
                                 funcionario.setSenha(novaSenha);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Senha alterada com sucesso!\n"
-                                    + "Deseja fazer mais alterações no produto? [S/N]:");
+                                    + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
                                 resposta = (scan.nextLine());
                                 if(resposta.equals("S")||resposta.equals("s")){
                                     controlador = true;
@@ -341,14 +361,16 @@ public class Sistema {
         System.out.println("Senha: ");
         novoAdmin.setSenha(scan.nextLine());
         TP_POO.getAdministradoresCadastrados().add(novoAdmin);
+        HandlerJson.saveToJSON();
         System.out.println("Novo Administrador cadastrado com sucesso");   
     }
     
-    public static void exibirAdminsitradores(){
+    public static void exibirAdministradores(){
         System.out.println("----------ADMISTRADORES CADASTRADOS----------");
+        System.out.println("Atualmente o sistema conta com : "+ TP_POO.getAdministradoresCadastrados().size()+ " administradores.");
         System.out.println(TP_POO.getAdministradoresCadastrados());
     }
-    public static void editarAdmistrador(){
+    public static void editarAdministrador(){
         Scanner scan = new Scanner(System.in);
         String cpf;
         String resposta;
@@ -369,6 +391,7 @@ public class Sistema {
                                            3 - Endereco
                                            4 - Cpf:
                                            5 - Senha: """);
+                        System.out.println("Digite a opção: ");
                         alteracao =(scan.nextLine());
                         switch (alteracao) {
                             case "1" -> {
@@ -376,6 +399,7 @@ public class Sistema {
                                 System.out.println("Insira o novo nome: ");
                                 novoNome = (scan.nextLine());
                                 admin.setNome(novoNome);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Nome alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                                 resposta = (scan.nextLine());
@@ -393,6 +417,7 @@ public class Sistema {
                                 System.out.println("Insira o novo telefone: ");
                                 novoTelefone = (scan.nextLine());
                                 admin.setTelefone(novoTelefone);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Telefone alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                                 resposta = (scan.nextLine());
@@ -410,6 +435,7 @@ public class Sistema {
                                 System.out.println("Insira o novo endereço: ");
                                 novoEndereco = (scan.nextLine());
                                 admin.setEndereco(novoEndereco);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Endereço alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                                 resposta = (scan.nextLine());
@@ -427,6 +453,7 @@ public class Sistema {
                                 System.out.println("Insira o novo cpf: ");
                                 novoCpf = (scan.nextLine());
                                 admin.setCfp(novoCpf);
+                                HandlerJson.saveToJSON();
                                 System.out.println("CPF alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                                 resposta = (scan.nextLine());
@@ -444,6 +471,7 @@ public class Sistema {
                                 System.out.println("Insira a nova senha: ");
                                 novaSenha = (scan.nextLine());
                                 admin.setSenha(novaSenha);
+                                HandlerJson.saveToJSON();
                                 System.out.println("Senha alterada com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                                 resposta = (scan.nextLine());
@@ -456,6 +484,9 @@ public class Sistema {
                                     controlador = false;
                                 }
                             }
+                            default->{
+                                System.out.println("Opção não encontrada");
+                            }
                         }
                     }              
                 }
@@ -464,7 +495,7 @@ public class Sistema {
         catch(RuntimeException e) {
             e.getMessage();
         }
-        
+        HandlerJson.saveToJSON();
     }
     public static void deletarAdministrador(){
         Scanner scan = new Scanner(System.in);
@@ -477,11 +508,13 @@ public class Sistema {
                 if(admin.getCfp().equals(cpf)){
                     TP_POO.getAdministradoresCadastrados().remove(admin);
                     System.out.println("Adminstrador removido com sucesso.");
+                    HandlerJson.saveToJSON();
                 }
             }
         }catch(RuntimeException e){
             e.getMessage();
         }
+        HandlerJson.saveToJSON();
     } 
     
     public static void criarPedido(){
@@ -656,10 +689,13 @@ public class Sistema {
         System.out.println("Preço do produto: ");
         novoProduto.setPreco(scan.nextFloat());
         TP_POO.getMeusProdutos().add(novoProduto);
+        HandlerJson.saveToJSON();
         
         return novoProduto;
     }
     public static void exibirProdutos(){
+        System.out.println("--------------PRODUTOS DISPONÍVEIS HOJE--------------");
+        System.out.println("Nosso cardápio conta com um total de : "+ TP_POO.getMeusProdutos().size()+ " produtos.");
         System.out.println(TP_POO.getMeusProdutos());
     }  
     
@@ -682,6 +718,7 @@ public class Sistema {
                         + "2 - Editar ingredientes do produto\n"
                         + "3 - Editar descrição detalhada\n"
                         + "4 - Editar preço do produto");
+                    System.out.println("Digite a opção desejada: ");
                     opcao = (scan.nextInt());
                     scan.nextLine();
                     switch (opcao){
@@ -691,6 +728,7 @@ public class Sistema {
                             System.out.println("Insira o novo nome do produto: ");
                             novoNome = (scan.nextLine());
                             produto.setNomeProduto(novoNome);
+                            HandlerJson.saveToJSON();
                             System.out.println("Nome alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             resposta = (scan.nextLine());
@@ -708,6 +746,7 @@ public class Sistema {
                             System.out.println("Insira os novos ingredientes do produto: ");
                             novosIngredientes = (scan.nextLine());
                             produto.setIngredientes(novosIngredientes);
+                            HandlerJson.saveToJSON();
                             System.out.println("Ingredientes alterados com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             resposta = (scan.nextLine());
@@ -725,6 +764,7 @@ public class Sistema {
                             System.out.println("Insira a nova descrição do produto: ");
                             novaDescricao = (scan.nextLine());
                             produto.setDescricaoProduto(novaDescricao);
+                            HandlerJson.saveToJSON();
                             System.out.println("Descrição alterada com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             resposta = (scan.nextLine());
@@ -742,6 +782,7 @@ public class Sistema {
                             System.out.println("Insira o novo preço do produto: ");
                             novoPreco = (scan.nextFloat());
                             produto.setPreco(novoPreco);
+                            HandlerJson.saveToJSON();
                             System.out.println("Preço alterado com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             scan.nextLine();
@@ -761,7 +802,8 @@ public class Sistema {
                     }
                 }     
             }
-        }      
+        }
+        HandlerJson.saveToJSON();
     }
     
     public static void deletarProduto(){
@@ -774,16 +816,18 @@ public class Sistema {
             for(Produto produto : TP_POO.getMeusProdutos()){
                 if(produto.getId()==id){
                     TP_POO.getMeusProdutos().remove(produto);
-                    System.out.println("Pedido removido com sucesso.");
+                    System.out.println("Produto removido com sucesso.");
+                    HandlerJson.saveToJSON();
                 }
             }
         }catch(RuntimeException e){
             e.getMessage();
         }
+        HandlerJson.saveToJSON();
     }
     
-    public static void login(){
-        
+    public static void login() throws IOException{
+
         Scanner scan = new Scanner(System.in);
         String cpf;
         String senha;
@@ -836,11 +880,14 @@ public class Sistema {
                             System.out.println("Senha incorreta.");
                             login();
                         }
-                        break;
-                    }                  
+                        //break;
+                    }else{
+                        System.out.println("O CPF informado não foi localizado em nossa base de dados");
+                        login();
+                    }
+                    break;                  
                 }
-                System.out.println("O CPF informado não foi localizado em nossa base de dados");
-                login();
+
             }
             default ->{
                 System.out.println("Não foi encontrada a opção");
@@ -848,27 +895,154 @@ public class Sistema {
             }
         }          
     }
-    public static void menuFuncionario(){
-        System.out.println("\n---------- Menu Funcionário ----------\n");
-        System.out.println("\nDigite somente o número da opção desejada:"
-                + "\n\n1 - Cadastrar Clientes");
+    
+    
+    public static void menuAdmin() throws IOException{
+        HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
-        String opc = scan.nextLine();
-
-        switch (opc) {
-            case "1":
-                Sistema.criarCliente();
-                Sistema.menuFuncionario();
-                break;
-            default:
-                System.out.println((char) 27 + "[31m\nOpção invalida\u001B[0m");
-                Sistema.menuFuncionario();
+        String opcaoDoSistema;
+        String escolha = null;
+        System.out.println("\n---------- Logado como: Administrador ----------\n");
+        System.out.println("OPÇÕES"
+                +"\nREFERENTES AOS CLIENTES: "
+                + "\n1 -  Cadastrar novo cliente"
+                + "\n2 -  Remover cliente"
+                + "\n3 -  Listar clientes"
+                + "\n4 -  Editar cliente"
+                +"\n"
+                +"\nREFERENTES AOS FUNCIONARIOS: "
+                + "\n5 -  Cadastrar novo funcionário"
+                + "\n6 -  Remover funcionário"
+                + "\n7 -  Listar funcionários"
+                + "\n8 -  Editar funcionário"
+                +"\n"
+                +"\nREFERENTES AOS PRODUTOS DA LANCHONETE: "
+                + "\n9 -  Cadastrar novo produto"
+                + "\n10 - Remover produto"
+                + "\n11 - Listar produtos disponíveis"
+                + "\n12 - Editar produto"
+                + "\n"
+                +"\n"
+                +"\nREFERENTES AO PERFIL DE ADMINISTRADOR: "
+                +"\n13 - Cadastrar novo Adminstrador"
+                +"\n14 - Editar meu perfil de Administrador"
+                +"\n15 - Listar todos os Administradores"
+                +"\n16 - Remover Administrador"
+                + "\n"
+                + "\n17 - Encerrar");
+                
+        System.out.println("Digite a opção desejada: ");
+        opcaoDoSistema = scan.nextLine();
+        switch(opcaoDoSistema){
+            case "1" ->{
+                criarCliente();
+                continuarNoSistema();               
+            }
+            case "2"->{
+                deletarCliente();
+                continuarNoSistema();          
+            }
+            case "3" ->{
+                exibirClientes();
+                continuarNoSistema();
+            }
+            case "4"->{
+                editarCliente();
+                continuarNoSistema();
+            }
+            case "5"->{
+                criarFuncionario();
+                continuarNoSistema();
+            }
+            case "6"->{
+                deletarFuncionario();
+                continuarNoSistema();
+            }
+            case "7"->{
+                exibirFuncionarios();
+                continuarNoSistema();
+            }
+            case "8" ->{
+                editarFuncionario();
+                continuarNoSistema();
+            }
+            case "9" ->{
+                criarProduto();
+                continuarNoSistema();
+            }
+            case "10"->{
+                deletarProduto();
+                continuarNoSistema();
+            }
+            case "11"->{
+                exibirProdutos();
+                continuarNoSistema();
+            }
+            case "12"->{
+                editarProduto();
+                continuarNoSistema();
+            }
+            case "13"->{
+                criarAdmistrador();
+                continuarNoSistema();
+            }
+            case "14" ->{
+                editarAdministrador();
+                continuarNoSistema();
+            }
+            case "15"->{
+                exibirAdministradores();
+                continuarNoSistema();
+            }
+            case "16"->{
+                deletarAdministrador();
+                continuarNoSistema();
+            }
+            
         }
     }
-    
-    public static void menuAdmin(){
-        System.out.println("\n---------- Menu Administrador ----------\n");
+    public static void continuarNoSistema() throws IOException{
+        Scanner scan = new Scanner(System.in);
+        String escolha = null;
+        System.out.println("""
+                           ----------------------------------------------
+                                   SUCESSO AO REALIZAR OPERAÇÃO
+                                   Permanecer no sistema?
+                                   1 - Permancer
+                                   2 - Sair do sistema""");
+                System.out.println("Digite sua escolha:");
+                escolha = scan.nextLine();
+                switch(escolha){
+                    case "1"->{
+                        menuAdmin();
+                    }
+                    case "2"->{
+                        System.out.println("Encerrando o sistema...");
+                        HandlerJson.saveToJSON();
+                    }
+                    default->{
+                        System.out.println("Opção inválida, retornando ao sistema...");
+                        menuAdmin();
+                    }
+                }
+    }
+    public static void menuFuncionario(){
+        Scanner scan = new Scanner(System.in);
+        String opcao = scan.nextLine();
+        System.out.println("\n---------- Logado como: Funcionário ----------\n");
+        System.out.println("\nDigite somente o número da opção desejada:"
+                + "\n\n1 - Cadastrar novo Cliente"
+                + "\n2 - Remover Cliente"
+                + "\n3 - Cadastrar novo funcionário"
+                + "\n4 - Remover funcionário"
+                + "\n5 - Cadastrar novo lanche"
+                + "\n6 - Remover Pedidos"
+                + "\n7 - Remover lanche"
+                + "\n8 - Listar Clientes"
+                + "\n9 - Encerrar Sistema\n"
+        );
+        System.out.println("Digite a opção desejada: blablabla ");
+        opcao = scan.nextLine();
+        System.out.println("Vocee escolheu a opcao " + opcao);
     }
 }
-
- 

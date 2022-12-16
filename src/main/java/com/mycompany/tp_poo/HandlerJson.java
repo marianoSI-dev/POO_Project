@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class HandlerJson {
     
-        public static void exitAndSaveToJSON(){
+        public static void saveToJSON(){
         Gson gson = new Gson();
         
         

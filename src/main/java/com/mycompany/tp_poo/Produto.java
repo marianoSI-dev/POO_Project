@@ -74,7 +74,13 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "\nProduto{" + "\nID do produto=" + id +" \nnomeProduto=" + nomeProduto + ", \ningredientes=" + ingredientes + ", \ndescricaoProduto=" + descricaoProduto + ", \npreco=" + preco + '}';
+        return "\n----------------------------------------------" + ""
+             + "\nID DO PRODUTO = " + id +""
+             + "\nNOME DO PRODUTO = " + nomeProduto + ""
+             + "\nINGREDIENTES = " + ingredientes + ""
+             + "\nDESCRIÇÃO DO PRODUTO = " + descricaoProduto + ""
+             + "\nPREÇO = " + preco + '\n'+
+                "----------------------------------------------";
     }
     
     

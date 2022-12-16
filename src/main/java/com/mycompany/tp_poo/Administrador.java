@@ -24,7 +24,14 @@ public class Administrador extends Funcionario {
     
     @Override
     public String toString() {
-        return "\nAdmistrador\n{" + "\nnome=" + this.getNome() + ",\ntelefone=" + this.getTelefone() + ",\nendereco=" + this.getEndereco() + ",\ncfp=" + this.getCfp() + ",\nsenha=" + this.getSenha() + ",\nadmin=" + this.isIsAdmin()+'\n' + '}';
+        return "\n----------------------------------------------"+""
+             + "\nNOME = " + this.getNome() + ""
+             + "\nTELEFONE = " + this.getTelefone() + ""
+             + "\nENDEREÇO = " + this.getEndereco() + ""
+             + "\nCPF = " + this.getCfp() + ""
+             + "\nSENHA = " + this.getSenha() + ""
+             + "\nADMINSTRADOR = " + this.isIsAdmin()+'\n' + '\n'+
+                "----------------------------------------------";
     }
     
 }
