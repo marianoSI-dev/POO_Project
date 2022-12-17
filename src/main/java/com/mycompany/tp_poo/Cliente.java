@@ -2,7 +2,7 @@
 package com.mycompany.tp_poo;
 
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     private String nome;
     private String telefone;
     private String endereco;
@@ -10,6 +10,8 @@ public class Cliente {
     
     //questao 10a
     private static int numClientes = 0;
+    //questao 10b
+    protected static int numClientes2 = 0;
     
     public  Cliente() {
         numClientes++;
@@ -69,10 +71,9 @@ public class Cliente {
                "----------------------------------------------";
     }
 
-    
-
-    
-    
-    
-    
+    @Override
+    public int compareTo(Cliente c) {
+        return this.getTelefone().compareTo(c.getTelefone());
+    }
+  
 }

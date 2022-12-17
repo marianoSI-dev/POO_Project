@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Pedido {
+public class Pedido implements Comparable<Pedido> {
     private static int contador = TP_POO.getMeusPedidos().size();
     private int id;
     private static String[] estadosDoPedido = {"Pedido em preparo", "Pedido a caminho", "Pedido entregue"};
@@ -134,6 +134,19 @@ public class Pedido {
              + "\nVALOR TOTAL DO PEDIDO = " + valorTotal + ""
              + "\nITENS DO PEDIDO = " + itensDoPedido +'\n'+ '\n'+
                 "----------------------------------------------";
+    }
+    
+    @Override
+    public int compareTo(Pedido p) {
+        if(this.valorTotal > p.getValorTotal()){
+            return 1;
+        }
+        else if(this.valorTotal < p.getValorTotal()){
+            return -1;
+        }
+        else{
+            return 0;
+        }
     }
     
 }

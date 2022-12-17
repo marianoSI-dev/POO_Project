@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import com.google.gson.*;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class TP_POO {
-
+    
     private static Funcionario funcionariosCadastrados[] = new Funcionario[15];
     private static ArrayList<Cliente> clientesCadastrados = new ArrayList<>();
     private static ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
@@ -16,28 +17,23 @@ public class TP_POO {
 
     
     public static void main(String[] args) throws Exception {
+        HandlerJson.openAndReadJson();
         
 
-        
-        meusProdutos.add(new Produto(0,"Cachorro Quente", "Pão, Salcicha, Batata-palha","Delicioso cachorro quente", (float) 12.00));
-        meusProdutos.add(new Produto(1,"Beirute", "Pão Sírio, Bacon, Filé Mignon, Presunto, Requeijão Cremoso, Queijo prato, Tomate, Alface, Maionese","Receita árabe, batata-palha opcional", (float) 25.00));
-        meusProdutos.add(new Produto(2,"Esfiha aberta de carne", "Carne moída, Tomate, Cebola, Pimenta","Receita árabe, pimenta opcional", (float) 7.50));
-        meusProdutos.add(new Produto(3,"Mini Pizza", "Calabresa, Mussarela, Orégano, Tomate","Ketchup e maionese como acompanhamento", (float) 6.00));
-        meusProdutos.add(new Produto(4,"Hambúrguer", "Bife, Alface, Tomate, Queijo, Batata palha, Presunto","Ketchup e maionese como acompanhamento", (float) 10.00));
-        meusProdutos.add(new Produto(5, "Esfiha aberta de queijo", "Queijo parmesão, orégano tomate","Receita árabe, tomate é opcional", (float) 7.00));
-        meusProdutos.add(new Produto(6,"Esfiha aberta de carne", "Carne moída, queijo parmesão, orégano, tomate","Receita árabe, tomate é opcional", (float) 9.00));
-        meusProdutos.add(new Produto(7,"Refrigerante lata", "Item industrializado","Coca-cola 350ml", (float) 3.50));
-        meusProdutos.add(new Produto(8,"Refrigerante 2 litros", "Item industrializado","Fanta 2 litros", (float) 10.00));
-        
-        clientesCadastrados.add(new Cliente("Mariano","88539207","Avenida do Contorno", "13904696629"));
-        clientesCadastrados.add(new Cliente("Rubenns","123123412","Avenida do blabla", "23151212412121"));
-        clientesCadastrados.add(new Cliente("Joaquim","123345678","Avenida do kkkkkkk", "435234534"));
-        
+        //questão 12
+        Collections.sort(clientesCadastrados);
+        Collections.sort(meusPedidos);
+        //Sistema.criarFuncionario();
+        //Sistema.criarFuncionario();
+        //Sistema.criarFuncionario();
         //area de testes
-
+        Sistema.login();
+        //Sistema.menuAdmin();
         //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
-        Sistema.menuAdmin();
-       
+        //System.out.println(numClientes());
+       //Sistema.exibirClientes();
+       //Sistema.criarCliente();
+       //System.out.println(numClientes());
         //System.out.println("TESTE 1");
         //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
         //System.out.println(getAdministradoresCadastrados());
@@ -115,9 +111,23 @@ public class TP_POO {
     }   
     
     //numero de clientes instanciados
-    public static int numClientes(){
+    //QUESTÃO 11
+    public static int numClientesEncapsulamento(){
         return Cliente.getNumClientes();
     }
+    public static int numClientesProtected(){
+        return Cliente.numClientes2;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static ArrayList<Cliente> getClientesCadastrados() {
         return clientesCadastrados;
     }

@@ -14,6 +14,8 @@ public class Sistema {
 
     public Sistema() {
     }
+    public static String cpfLogado;
+
     
     //CRUD CLIENTE
     public static void criarCliente(){
@@ -164,7 +166,8 @@ public class Sistema {
     } 
     
     //CRUD FUNCIONARIO
-    public static void criarFuncionario(){
+    public static void criarFuncionario() throws IOException{
+        HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
         System.out.println("----------CADASTRAR FUNCIONÁRIO----------");
         //conta quantas casas estão livres em meu array estatico
@@ -336,6 +339,9 @@ public class Sistema {
                                     System.out.println("Opção inválida");
                                     controlador = false;
                                 }
+                            }
+                            default->{
+                                System.out.println("Opção inválida");
                             }
                         }
                     }                   
@@ -527,10 +533,12 @@ public class Sistema {
         String cpfPedido;
         Pedido novoPedido = new Pedido();
         
+
         
         System.out.println("----------CADASTRAR PEDIDO----------");
         System.out.println("Insira o cpf do cliente titular do pedido: ");
         cpfPedido = scan.nextLine();
+        
         
         boolean clienteExiste = false;
         for(Cliente cliente : TP_POO.getClientesCadastrados()){
@@ -644,7 +652,7 @@ public class Sistema {
                     System.out.println("O que você deseja editar no pedido:\n"
                         + "1 - Descrição detalhada\n"
                         + "2 - Atualizar estado do pedido do pedido"
-                        + "3 - Atualizar produtos do pedido");
+                    );
                     opcao = (scan.nextInt());
                     scan.nextLine();
                     switch (opcao) {
@@ -653,6 +661,7 @@ public class Sistema {
                             System.out.println("Insira a nova descrição: ");
                             novaDescricao = (scan.nextLine());
                             pedido.setDescricaoDetalhada(novaDescricao);
+                            HandlerJson.saveToJSON();
                             System.out.println("Descrição alterada com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             resposta = (scan.nextLine());
@@ -673,14 +682,17 @@ public class Sistema {
                             switch(opcao2){
                                 case "1" ->{
                                     pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[1]);
+                                    HandlerJson.saveToJSON();
                                 }
                                 case "2" ->{
                                     pedido.setEstadoDoPedido(Pedido.getEstadosDoPedido()[2]);
+                                    HandlerJson.saveToJSON();
                                 }
                                 default ->{
                                     System.out.println("Opção inválida.");   
                                 }
                             }
+                            HandlerJson.openAndReadJson();
                             System.out.println("Descrição alterada com sucesso!\n"
                                     + "Deseja fazer mais alterações no produto? [S/N]:");
                             resposta = (scan.nextLine());
@@ -916,7 +928,7 @@ public class Sistema {
     }
     
     public static void login() throws IOException{
-
+        HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
         String cpf;
         String senha;
@@ -934,21 +946,34 @@ public class Sistema {
                 System.out.println("\n---------- Login como Administrador ----------\n");
                 System.out.println("CPF: ");
                 cpf = scan.nextLine();
+                boolean adminExiste = false;
+                for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
+                    if(admin.getCfp().equals(cpf)  ){
+                        adminExiste = true;
+                        break;
+                    }            
+                }
+                if(adminExiste == false){
+                    System.out.println("Não existe um administrador com esse cpf em nossa base de dados.");
+                    login();
+                }else{
+                    System.out.println("");
+                }
+                
                 for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
                     if(admin.getCfp().equals(cpf)){
                         System.out.println("Olá "+ admin.getNome());
                         System.out.println("Digite sua senha: ");
                         senha = scan.nextLine();
                         if(admin.getSenha().equals(senha)){
+
+                            cpfLogado = cpf;
                             menuAdmin();
                         }else{
                             System.out.println("Senha incorreta.");
                             login();
                             break;
                         }                
-                    }else{
-                        System.out.println("O CPF informado não foi localizado em nossa base de dados");
-                        login();
                     }
                     break;
                 }
@@ -958,40 +983,113 @@ public class Sistema {
                 System.out.println("\n---------- Login como Funcionário ----------\n");
                 System.out.println("CPF: ");
                 cpf = scan.nextLine();
+                boolean funcionarioExiste = false;
+                for(Funcionario func : TP_POO.getFuncionariosCadastrados()){
+                    if(func != null && func.getCfp().equals(cpf)  ){
+                        funcionarioExiste = true;
+                        break;
+                    }            
+                }
+                if(funcionarioExiste == false){
+                    System.out.println("Não existe um funcionário com esse cpf em nossa base de dados.");
+                    login();
+                }else{
+                    System.out.println("");
+                }
                 for(Funcionario funcionario : TP_POO.getFuncionariosCadastrados()){
                     if(funcionario != null && funcionario.getCfp().equals(cpf) ){
                         System.out.println("Olá "+ funcionario.getNome());
                         System.out.println("Digite sua senha: ");
                         senha = scan.nextLine();
                         if(funcionario.getSenha().equals(senha)){
+                            cpfLogado = cpf;
                             menuFuncionario();
                         }else{
                             System.out.println("Senha incorreta.");
                             login();
                         }
-                        //break;
-                    }else{
-                        System.out.println("O CPF informado não foi localizado em nossa base de dados");
-                        login();
-                    }
-                    break;                  
+                    }             
                 }
-
             }
             default ->{
                 System.out.println("Não foi encontrada a opção");
                 login();
             }
-        }          
+        }  
+        return;
     }
     
+    public static void editarCredenciais() throws IOException{
+        HandlerJson.openAndReadJson();
+        Scanner scan = new Scanner(System.in);
+        String resposta;
+        
+
+           boolean controlador = true;
+           Funcionario funcionario = null;
+           for(Funcionario func : TP_POO.getFuncionariosCadastrados()){
+               if(func.getCfp().equals(cpfLogado)){
+                   funcionario = func;
+                   break;
+               }
+           }
+           while(controlador){
+               String alteracao;
+               System.out.println("""
+                                  O que voce deseja alterar?
+                                  1 - Nome
+                                  2 - Senha""");
+               alteracao =(scan.nextLine());
+               switch (alteracao) {
+                   case "1" -> {
+                       String novoNome;
+                       System.out.println("Insira o novo nome: ");
+                       novoNome = (scan.nextLine());
+                       funcionario.setNome(novoNome);
+                       HandlerJson.saveToJSON();
+                       System.out.println("Nome alterado com sucesso!\n"
+                           + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
+                       resposta = (scan.nextLine());
+                       if(resposta.equals("S")||resposta.equals("s")){
+                           controlador = true;
+                       }else if(resposta.equals("N")||resposta.equals("n")){
+                           controlador = false;
+                       }else{
+                           System.out.println("Opção inválida");
+                           controlador = false;
+                       }
+                   }
+                   case "2" -> {
+                       String novaSenha;
+                       System.out.println("Insira a nova senha: ");
+                       novaSenha = (scan.nextLine());
+                       funcionario.setSenha(novaSenha);
+                       HandlerJson.saveToJSON();
+                       System.out.println("Senha alterada com sucesso!\n"
+                           + "Deseja fazer mais alterações no cadastro do funcionario? [S/N]:");
+                       resposta = (scan.nextLine());
+                       if(resposta.equals("S")||resposta.equals("s")){
+                           controlador = true;
+                       }else if(resposta.equals("N")||resposta.equals("n")){
+                           controlador = false;
+                       }else{
+                           System.out.println("Opção inválida");
+                           controlador = false;
+                       }
+                   }
+                   default->{
+                       System.out.println("Opção inválida");
+                   }
+               }
+           }    
+    }
     
     public static void menuAdmin() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
         String opcaoDoSistema;
         String escolha = null;
-        System.out.println("\n---------- Logado como: Administrador ----------\n");
+        System.out.println("\n------------- Logado como: Administrador -------------\n");
         System.out.println("OPÇÕES"
                 +"\nREFERENTES AOS CLIENTES: "
                 + "\n1 -  Cadastrar novo cliente"
@@ -1022,8 +1120,12 @@ public class Sistema {
                 +"\n18 - Editar meu perfil de Administrador"
                 +"\n19 - Listar todos os Administradores"
                 +"\n20 - Remover Administrador"
-                + "\n"
-                + "\n21 - Encerrar");
+                +"\n"
+                +"\nREFERENTES À ESTATÍSTICAS E INFORMAÇÕES SOBRE VENDAS: "
+                +"\n21 - Estatísticas sobre vendas"
+                +"\n22 - Buscar pedidos por intervalo"
+                +"\n"
+                + "\n23 - Encerrar");
                 
         System.out.println("Digite a opção desejada: ");
         opcaoDoSistema = scan.nextLine();
@@ -1097,7 +1199,7 @@ public class Sistema {
                 continuarNoSistema();
             }
             case "18" ->{
-                editarAdministrador();
+                editarCredenciais();
                 continuarNoSistema();
             }
             case "19"->{
@@ -1108,7 +1210,15 @@ public class Sistema {
                 deletarAdministrador();
                 continuarNoSistema();
             }
-            
+            case "21"->{
+
+            }
+            case "22"->{
+                
+            }
+            case "23"->{
+
+            } 
         }
     }
     public static void continuarNoSistema() throws IOException{
@@ -1136,23 +1246,33 @@ public class Sistema {
                     }
                 }
     }
-    public static void menuFuncionario(){
+    public static void menuFuncionario() throws IOException{
         Scanner scan = new Scanner(System.in);
-        String opcao = scan.nextLine();
+        String opcaoDoSistema = scan.nextLine();
         System.out.println("\n---------- Logado como: Funcionário ----------\n");
-        System.out.println("\nDigite somente o número da opção desejada:"
-                + "\n\n1 - Cadastrar novo Cliente"
-                + "\n2 - Remover Cliente"
-                + "\n3 - Cadastrar novo funcionário"
-                + "\n4 - Remover funcionário"
-                + "\n5 - Cadastrar novo lanche"
-                + "\n6 - Remover Pedidos"
-                + "\n7 - Remover lanche"
-                + "\n8 - Listar Clientes"
-                + "\n9 - Encerrar Sistema\n"
-        );
-        System.out.println("Digite a opção desejada: blablabla ");
-        opcao = scan.nextLine();
-        System.out.println("Vocee escolheu a opcao " + opcao);
+        System.out.println("OPÇÕES"
+                +"\nREFERENTES AOS FUNCIONARIOS: "
+                + "\n1  -  Editar minhas credenciais"
+                +"\n"
+                +"\nREFERENTES AOS PEDIDOS: "
+                + "\n9  -  Cadastrar novo pedido"
+                + "\n10 - Remover pedido"
+                + "\n11 - Listar pedidos (EXTRATOS)"
+                + "\n12 - Editar pedido"
+                +"\n"
+                +"\nREFERENTES À ESTATÍSTICAS E INFORMAÇÕES SOBRE VENDAS: "
+                +"\n21 - Estatísticas sobre vendas"
+                +"\n22 - Buscar pedidos por intervalo"
+                +"\n"
+                + "\n23 - Encerrar");
+        System.out.println("Digite a opção desejada: ");
+        opcaoDoSistema = scan.nextLine();
+        
+        switch(opcaoDoSistema){
+            case"1"->{
+                editarCredenciais();
+                continuarNoSistema();
+            }
+        }
     }
 }
