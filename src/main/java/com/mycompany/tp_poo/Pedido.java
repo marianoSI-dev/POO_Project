@@ -123,7 +123,17 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "\nPedido{"+"\nCPF do cliente =" + clienteCpf + "\nidPedido=" + id +"\ndataPedido=" + dataPedido + ", \nhorarioPedido=" + horarioPedido + ", \nestadoDoPedido=" + estadoDoPedido + ", \nhorarioEntrega=" + horarioEntrega + ", \ndescricaoDetalhada=" + descricaoDetalhada + ", \nvalorTotal=" + valorTotal + ", \nitensDoPedido=" + itensDoPedido +'\n'+ '}';
+        return "\n----------------------------------------------"+""
+             + "\nCPF DO CLIENTE = " + clienteCpf + ""
+             + "\nID DO PEDIDO = " + id +""
+             + "\nDATA DO PEDIDO = " + dataPedido + ""
+             + "\nHORA DO PEDIDO = " + horarioPedido + ""
+             + "\nESTADO DO PEDIDO = " + estadoDoPedido + ""
+             + "\nHORARIO DA ENTREGA = " + horarioEntrega + ""
+             + "\nDESCRIÇÃO DETALHADA=" + descricaoDetalhada + ""
+             + "\nVALOR TOTAL DO PEDIDO = " + valorTotal + ""
+             + "\nITENS DO PEDIDO = " + itensDoPedido +'\n'+ '\n'+
+                "----------------------------------------------";
     }
     
 }

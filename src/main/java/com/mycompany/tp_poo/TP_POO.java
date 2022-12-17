@@ -36,12 +36,8 @@ public class TP_POO {
         //area de testes
 
         //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
-        //Sistema.menuAdmin();
-        
-        
-        for(int i = 0; i <100;i++){
-            Sistema.criarId();
-        }
+        Sistema.menuAdmin();
+       
         //System.out.println("TESTE 1");
         //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
         //System.out.println(getAdministradoresCadastrados());

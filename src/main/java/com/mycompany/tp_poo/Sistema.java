@@ -520,7 +520,7 @@ public class Sistema {
         HandlerJson.saveToJSON();
     } 
     
-    public static void criarPedido(){
+    public static void criarPedido() throws IOException{
         Scanner scan = new Scanner(System.in);
         float valorTotal = 0;
         boolean controlador = true;
@@ -529,12 +529,25 @@ public class Sistema {
         
         
         System.out.println("----------CADASTRAR PEDIDO----------");
-        System.out.println("Insira o cpf do titular do pedido: ");
+        System.out.println("Insira o cpf do cliente titular do pedido: ");
         cpfPedido = scan.nextLine();
+        
+        boolean clienteExiste = false;
+        for(Cliente cliente : TP_POO.getClientesCadastrados()){
+            if(cliente.getCpf().equals(cpfPedido)  ){
+                clienteExiste = true;
+                break;
+            }            
+        }
+        if(clienteExiste == false){
+            System.out.println("Esse cliente não existe em nossa base de dados.");
+        }else{
+            System.out.println("");
+        }
         for(Cliente cliente : TP_POO.getClientesCadastrados()){
             if(cliente.getCpf().equals(cpfPedido)){
                 novoPedido.setClienteCpf(cpfPedido);
-                novoPedido.setId(Pedido.getContador());
+                novoPedido.setId(criarIdPedido());
                 novoPedido.setDataPedido(LocalDate.now().toString());
                 novoPedido.setHorarioPedido(LocalTime.now().toString());
                 novoPedido.setEstadoDoPedido("Em preparo");
@@ -543,7 +556,7 @@ public class Sistema {
                 novoPedido.setDescricaoDetalhada(scan.nextLine());
 
                 while(controlador){
-                    Integer produto;
+                    int produto;
                     System.out.println("Adicionar produtos ao pedido:\n ");
                     for(Produto produtos : TP_POO.getMeusProdutos()){
                         System.out.println(produtos.getId() +" - "+ produtos.getNomeProduto());
@@ -555,8 +568,18 @@ public class Sistema {
                         String opcao;
                         
                         if(produtoEscolhido.getId() == produto){
-                            novoPedido.getItensDoPedido().add(TP_POO.getMeusProdutos().get(produto)); 
-                            valorTotal +=TP_POO.getMeusProdutos().get(produto).getPreco();
+                  
+                            Produto produtoDoPedido = null;
+                            
+                            for(int i = 0; i<TP_POO.getMeusProdutos().size();i++){
+                                if(TP_POO.getMeusProdutos().get(i).getId() == produtoEscolhido.getId()){
+                                    produtoDoPedido = TP_POO.getMeusProdutos().get(i);
+                                }
+                            }
+                            novoPedido.getItensDoPedido().add(produtoDoPedido); 
+                            
+  
+                            valorTotal +=produtoDoPedido.getPreco();
                             HandlerJson.saveToJSON();
                             System.out.println("Item adicionado com sucesso! Deseja adicionar mais itens? [S/N]");
                             opcao = scan.nextLine();
@@ -566,27 +589,28 @@ public class Sistema {
                                 controlador = false;
                             }else{
                                 System.out.println("Opção inválida. encerrando pedido...");
-                                controlador = false;
-                                
+                                controlador = false;  
                             }
                         }
                     }
                 }        
                 novoPedido.setValorTotal(valorTotal);
+                System.out.println(novoPedido);
                 TP_POO.getMeusPedidos().add(novoPedido);
+                HandlerJson.saveToJSON();
                 //break;
-            }else if(TP_POO.getClientesCadastrados().indexOf(cliente) == ( TP_POO.getClientesCadastrados().size()-1)){
-                System.out.println("Não existe cliente vínculado à esse cpf");
             }
         }
         HandlerJson.saveToJSON();
     }
+    
     public static void exibirPedidos(){
         System.out.println("----------PEDIDOS FEITOS----------");
         System.out.println(TP_POO.getMeusPedidos());
     }
     
-    public static void editarPedido(){
+    public static void editarPedido() throws IOException{
+        HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
         
         int id;
@@ -595,18 +619,32 @@ public class Sistema {
         int opcao;
         String opcao2;
         String resposta;
+
         
         System.out.println("Informe o id do pedido que deseja alterar: ");
         id = (scan.nextInt());
-
         
+        boolean pedidoExiste = false;
+        for(Pedido pedido : TP_POO.getMeusPedidos()){
+            if(pedido.getId()==id){
+                pedidoExiste = true;
+                break;
+            }            
+        }
+        if(pedidoExiste == false){
+            System.out.println("Não foi localizado no sistema um pedido com o ID informado, favor conferir.");
+        }else{
+            System.out.println("");
+        }
+
         for(Pedido pedido : TP_POO.getMeusPedidos()){
             if(pedido.getId() == id){
                 boolean controlador = true;
                 while(controlador){
                     System.out.println("O que você deseja editar no pedido:\n"
                         + "1 - Descrição detalhada\n"
-                        + "2 - Atualizar estado do pedido do pedido");
+                        + "2 - Atualizar estado do pedido do pedido"
+                        + "3 - Atualizar produtos do pedido");
                     opcao = (scan.nextInt());
                     scan.nextLine();
                     switch (opcao) {
@@ -665,12 +703,27 @@ public class Sistema {
         Scanner scan = new Scanner(System.in);
         int id;
         
+        
         System.out.println("Informe o id do pedido que deseja excluir:");
         id = (scan.nextInt());
+        
+        boolean pedidoExiste = false;
+        for(Pedido pedido : TP_POO.getMeusPedidos()){
+            if(pedido.getId()==id){
+                pedidoExiste = true;
+                break;
+            }            
+        }
+        if(pedidoExiste == false){
+            System.out.println("Não foi localizado no sistema um pedido com o ID informado, favor conferir.");
+        }else{
+            System.out.println("");
+        }
         try{
             for(Pedido pedido : TP_POO.getMeusPedidos()){
                 if(pedido.getId()==id){
                     TP_POO.getMeusPedidos().remove(pedido);
+                    HandlerJson.saveToJSON();
                     System.out.println("Pedido removido com sucesso.");
                 }
             }
@@ -680,27 +733,42 @@ public class Sistema {
     } 
     
     
-    public static void criarId() throws IOException{
+    public static int criarIdProduto() throws IOException{
         HandlerJson.openAndReadJson();
         Random random = new Random();
         
-        ArrayList<Integer> lista = new ArrayList<Integer>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for(int i=0; i<TP_POO.getMeusProdutos().size(); i++){
             lista.add(TP_POO.getMeusProdutos().get(i).getId());
         }
-        Integer numero = random.nextInt(15);
+        Integer numero = random.nextInt(50);
         while(lista.contains(numero)){
-            numero = random.nextInt(15);
+            numero = random.nextInt(50);
         }
         
-        System.out.println(lista);
-        System.out.println(numero);
+        return numero;
     }
-    public static Produto criarProduto(){
+    public static int criarIdPedido() throws IOException{
+        HandlerJson.openAndReadJson();
+        Random random = new Random();
+        
+        ArrayList<Integer> lista = new ArrayList<>();
+        for(int i=0; i<TP_POO.getMeusPedidos().size(); i++){
+            lista.add(TP_POO.getMeusPedidos().get(i).getId());
+        }
+        Integer numero = random.nextInt(50);
+        while(lista.contains(numero)){
+            numero = random.nextInt(50);
+        }
+        
+        return numero;
+    }
+    
+    public static Produto criarProduto() throws IOException{
         Scanner scan = new Scanner(System.in);
         Produto novoProduto = new Produto();
         
-        novoProduto.setId(Produto.getContador());
+        novoProduto.setId(criarIdProduto());
         System.out.println("Nome do produto: ");
         novoProduto.setNomeProduto(scan.nextLine());
         System.out.println("Ingredientes: ");
@@ -940,7 +1008,7 @@ public class Sistema {
                 +"\nREFERENTES AOS PEDIDOS: "
                 + "\n9 -  Cadastrar novo pedido"
                 + "\n10 - Remover pedido"
-                + "\n11 - Listar produtos pedidos"
+                + "\n11 - Listar pedidos (EXTRATOS)"
                 + "\n12 - Editar pedido"
                 +"\n"
                 +"\nREFERENTES AOS PRODUTOS DA LANCHONETE: "
@@ -993,15 +1061,20 @@ public class Sistema {
                 continuarNoSistema();
             }
             case "9"->{
-
+                criarPedido();
+                continuarNoSistema();
             }
             case "10"->{
+                deletarPedido();
+                continuarNoSistema();
             }
             case "11"->{
-            
+                exibirPedidos();
+                continuarNoSistema();
             }
             case "12"->{
-            
+                editarPedido();
+                continuarNoSistema();
             }
             case "13" ->{
                 criarProduto();
