@@ -22,17 +22,32 @@ public class Sistema {
     
     //CRUD CLIENTE
     public static void criarCliente(){
+        
+        boolean cpfExiste = false;
         Scanner scan = new Scanner(System.in);        
         System.out.println("----------CADASTRAR CLIENTE----------");
         Cliente novoCliente = new Cliente();
-        System.out.println("Nome completo: ");
+        System.out.printf("Nome completo: ");
         novoCliente.setNome(scan.nextLine());
-        System.out.println("Telefone: ");
+        System.out.printf("Telefone: ");
         novoCliente.setTelefone(scan.nextLine());
-        System.out.println("Endereco: ");
+        System.out.printf("Endereco: ");
         novoCliente.setEndereco(scan.nextLine());
-        System.out.println("CPF: ");
+        System.out.printf("CPF: ");
         novoCliente.setCpf(scan.nextLine());
+        
+        for(Cliente cliente : TP_POO.getClientesCadastrados()){
+            if(cliente.getCpf().equals(novoCliente.getCpf())){
+                cpfExiste = true;
+                break;
+            }
+        }
+        
+        if(cpfExiste){
+            System.out.println("Esse cpf já faz parte de nossa base de dados. Favor verificar.");
+            return;
+        }
+        
         TP_POO.getClientesCadastrados().add(novoCliente);      
         System.out.println("Cliente cadastrado com sucesso");  
         HandlerJson.saveToJSON();
@@ -171,6 +186,8 @@ public class Sistema {
     //CRUD FUNCIONARIO
     public static void criarFuncionario() throws IOException{
         HandlerJson.openAndReadJson();
+        
+        
         Scanner scan = new Scanner(System.in);
         System.out.println("----------CADASTRAR FUNCIONÁRIO----------");
         //conta quantas casas estão livres em meu array estatico
@@ -182,16 +199,30 @@ public class Sistema {
         }
         
         if(contador>0){
+            boolean cpfExiste = false;
+            
             Funcionario novoFuncionario = new Funcionario();
-            System.out.println("Insira o nome do funcionário: ");
+            System.out.printf("Insira o nome do funcionário: ");
             novoFuncionario.setNome((scan.nextLine()));
-            System.out.println("Telefone: ");
+            System.out.printf("Telefone: ");
             novoFuncionario.setTelefone((scan.nextLine()));
-            System.out.println("Endereço do novo funcionário:");
+            System.out.printf("Endereço do novo funcionário: ");
             novoFuncionario.setEndereco((scan.nextLine()));
-            System.out.println("Cpf: ");
+            System.out.printf("Cpf: ");
             novoFuncionario.setCfp((scan.nextLine()));
-            System.out.println("Senha:");
+            for(Funcionario funcionario : TP_POO.getFuncionariosCadastrados()){
+                if( funcionario != null && funcionario.getCfp().equals(novoFuncionario.getCfp())){
+                    cpfExiste = true;
+                    break;
+                }
+            }
+        
+            if(cpfExiste){
+                System.out.println("Esse cpf já faz parte de nossa base de dados. Favor verificar.");
+                return;
+            }
+            
+            System.out.printf("Senha: ");
             novoFuncionario.setSenha((scan.nextLine()));
             for(int i = 0; i < TP_POO.getFuncionariosCadastrados().length; i++){
             if(TP_POO.getFuncionariosCadastrados()[i]== null)
@@ -201,7 +232,7 @@ public class Sistema {
                 break;
             } 
         }}else{
-            System.out.println("Número máximo de funcionarios cadsatrados atingido. Tente remover algum antes de tentar novamente.");
+            System.out.println("Número máximo de funcionarios cadastrados atingido. Tente remover algum antes de tentar novamente.");
         }
         HandlerJson.saveToJSON();
     }
@@ -360,21 +391,33 @@ public class Sistema {
     public static void criarAdministrador(){
         System.out.println("----------CADASTRAR ADMINISTRADOR----------");
         Scanner scan = new Scanner(System.in);
+        boolean cpfExiste = false;
         
         Administrador novoAdmin = new Administrador();
-        System.out.println("Nome completo: ");
+        System.out.printf("Nome completo: ");
         novoAdmin.setNome(scan.nextLine());
-        System.out.println("Telefone: ");
+        System.out.printf("Telefone: ");
         novoAdmin.setTelefone(scan.nextLine());
-        System.out.println("Endereco: ");
+        System.out.printf("Endereco: ");
         novoAdmin.setEndereco(scan.nextLine());
-        System.out.println("CPF: ");
+        System.out.printf("CPF: ");
         novoAdmin.setCfp(scan.nextLine());
-        System.out.println("Senha: ");
+        for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
+            if(admin.getCfp().equals(novoAdmin.getCfp())){
+                cpfExiste = true;
+                break;
+            }
+        }
+        
+        if(cpfExiste){
+            System.out.println("Esse cpf já faz parte de nossa base de dados. Favor verificar.");
+            return;
+        }
+        System.out.printf("Senha: ");
         novoAdmin.setSenha(scan.nextLine());
         TP_POO.getAdministradoresCadastrados().add(novoAdmin);
         HandlerJson.saveToJSON();
-        System.out.println("Novo Administrador cadastrado com sucesso");   
+        System.out.printf("Novo Administrador cadastrado com sucesso");   
     }
     
     public static void exibirAdministradores(){
@@ -990,13 +1033,13 @@ public class Sistema {
         System.out.println("Logar como\n"
                 + "Adminstrador -> Digite 1\n"
                 + "Funcionário  -> Digite 2");
-        System.out.println("Opção: ");
+        System.out.printf("Opção: ");
         opcao = scan.nextLine();
         
         switch(opcao){
             case "1" -> {
                 System.out.println("\n---------- Login como Administrador ----------\n");
-                System.out.println("CPF: ");
+                System.out.printf("CPF: ");
                 cpf = scan.nextLine();
                 boolean adminExiste = false;
                 for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
@@ -1017,12 +1060,10 @@ public class Sistema {
                 for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
                     if(admin.getCfp().equals(cpf)){
                         System.out.println("Olá "+ admin.getNome());
-                        System.out.println("Digite sua senha: ");
+                        System.out.printf("Digite sua senha: ");
                         senha = scan.nextLine();
                         if(admin.getSenha().equals(senha)){
-
                             cpfLogado = cpf;
-                            
                             menuAdmin();
                         }else{
                             System.out.println("Senha incorreta.");
@@ -1055,7 +1096,7 @@ public class Sistema {
                 for(Funcionario funcionario : TP_POO.getFuncionariosCadastrados()){
                     if(funcionario != null && funcionario.getCfp().equals(cpf) ){
                         System.out.println("Olá "+ funcionario.getNome());
-                        System.out.println("Digite sua senha: ");
+                        System.out.printf("Digite sua senha: ");
                         senha = scan.nextLine();
                         if(funcionario.getSenha().equals(senha)){
                             cpfLogado = cpf;
@@ -1156,11 +1197,11 @@ public class Sistema {
         valorMedio = (totalArrecadado/pedidosRealizados);
         String valorMedioFormatado = df.format(valorMedio);
         
-        System.out.println("O TOTAL ARRECADADO COM AS VENDA NO ESTABELECIOMENTO FOI DE R$ " + totalArrecadado);
+        System.out.println("O TOTAL ARRECADADO COM AS VENDA NO ESTABELECIMENTO FOI DE R$ " + totalArrecadado);
         System.out.println("------------------------------------------------------------------------");
         System.out.println("FORAM REALIZADOS " + pedidosRealizados + " PEDIDOS");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIOMENTO FOI R$ " + valorMedioFormatado);
+        System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIMENTO FOI R$ " + valorMedioFormatado);
         
     }
     public static void menuAdmin() throws IOException{
@@ -1290,7 +1331,8 @@ public class Sistema {
                 continuarNoSistema();
             }
             case "21"->{
-
+                estatisticasDoSistema();
+                continuarNoSistema();
             }
             case "22"->{
                 
@@ -1351,7 +1393,7 @@ public class Sistema {
                 continuarNoSistema();
             }
             case"7"->{
-
+                estatisticasDoSistema();
                 continuarNoSistema();
             }
             case"8"->{
@@ -1364,6 +1406,7 @@ public class Sistema {
             }
         }
     }
+    
     public static void continuarNoSistema() throws IOException{
         Scanner scan = new Scanner(System.in);
         String escolha = null;
@@ -1373,25 +1416,25 @@ public class Sistema {
                                    Permanecer no sistema?
                                    1 - Permancer
                                    2 - Sair do sistema""");
-                System.out.println("Digite sua escolha:");
-                escolha = scan.nextLine();
-                switch(escolha){
-                    case "1"->{
-                        if(adminLogado){
-                            menuAdmin();
-                        }else if(funcionarioLogado){
-                            menuFuncionario();
-                        }
-                        
-                    }
-                    case "2"->{
-                        System.out.println("Encerrando o sistema...");
-                        HandlerJson.saveToJSON();
-                    }
-                    default->{
-                        System.out.println("Opção inválida, retornando ao sistema...");
-                        menuAdmin();
-                    }
+        System.out.println("Digite sua escolha:");
+        escolha = scan.nextLine();
+        switch(escolha){
+            case "1"->{
+                if(adminLogado){
+                    menuAdmin();
+                }else if(funcionarioLogado){
+                    menuFuncionario();
                 }
+
+            }
+            case "2"->{
+                System.out.println("Encerrando o sistema...");
+                HandlerJson.saveToJSON();
+            }
+            default->{
+                System.out.println("Opção inválida, retornando ao sistema...");
+                menuAdmin();
+            }
+        }
     }
 }
