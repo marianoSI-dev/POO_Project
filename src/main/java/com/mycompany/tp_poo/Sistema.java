@@ -1,6 +1,7 @@
 package com.mycompany.tp_poo;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class Sistema {
     public Sistema() {
     }
     public static String cpfLogado;
+    public static boolean adminLogado = false;
+    public static boolean funcionarioLogado = false;
 
     
     //CRUD CLIENTE
@@ -742,7 +745,56 @@ public class Sistema {
         }catch(RuntimeException e){
             e.getMessage();
         }
-    } 
+    }
+    
+    public static void editarEstadoDoPedido() throws IOException{
+        HandlerJson.openAndReadJson();
+        Scanner scan = new Scanner(System.in);
+        
+        int id; 
+        String opcao2;
+        Pedido pedidoModificar = null; 
+        
+        System.out.println("Informe o id do pedido que deseja alterar o estado: ");
+        id = (scan.nextInt());
+        scan.nextLine();
+        
+        boolean pedidoExiste = false;
+        for(Pedido pedido : TP_POO.getMeusPedidos()){
+            if(pedido.getId()==id){
+                pedidoExiste = true;
+                pedidoModificar = pedido;
+                break;
+            }            
+        }
+        if(pedidoExiste == false){
+            System.out.println("Não foi localizado no sistema um pedido com o ID informado, favor conferir.");
+            return;
+        }else{
+            System.out.println("");
+        }
+        System.out.println("Escolha o novo estado do pedido:\n"
+                                    + "1 - Pedido a caminho\n"
+                                    + "2 - Pedido entregue ");
+        opcao2 = scan.nextLine();
+        switch(opcao2){
+            case "1" ->{
+                if(pedidoModificar.getEstadoDoPedido().equals(Pedido.getEstadosDoPedido()[2])){
+                    System.out.println("O pedido em questão já foi entregue");
+                    return;
+                }
+                pedidoModificar.setEstadoDoPedido(Pedido.getEstadosDoPedido()[1]);
+                HandlerJson.saveToJSON();
+            }
+            case "2" ->{
+                pedidoModificar.setEstadoDoPedido(Pedido.getEstadosDoPedido()[2]);
+                HandlerJson.saveToJSON();
+            }
+            default ->{
+                System.out.println("Opção inválida.");   
+            }
+        }
+    }
     
     
     public static int criarIdProduto() throws IOException{
@@ -950,11 +1002,13 @@ public class Sistema {
                 for(Administrador admin : TP_POO.getAdministradoresCadastrados()){
                     if(admin.getCfp().equals(cpf)  ){
                         adminExiste = true;
+                        adminLogado = true;
                         break;
                     }            
                 }
                 if(adminExiste == false){
                     System.out.println("Não existe um administrador com esse cpf em nossa base de dados.");
+                    System.out.println("Tente novamente...");
                     login();
                 }else{
                     System.out.println("");
@@ -968,6 +1022,7 @@ public class Sistema {
                         if(admin.getSenha().equals(senha)){
 
                             cpfLogado = cpf;
+                            
                             menuAdmin();
                         }else{
                             System.out.println("Senha incorreta.");
@@ -992,6 +1047,7 @@ public class Sistema {
                 }
                 if(funcionarioExiste == false){
                     System.out.println("Não existe um funcionário com esse cpf em nossa base de dados.");
+                    System.out.println("Tente novamente...");
                     login();
                 }else{
                     System.out.println("");
@@ -1003,6 +1059,7 @@ public class Sistema {
                         senha = scan.nextLine();
                         if(funcionario.getSenha().equals(senha)){
                             cpfLogado = cpf;
+                            funcionarioLogado = true;
                             menuFuncionario();
                         }else{
                             System.out.println("Senha incorreta.");
@@ -1028,7 +1085,7 @@ public class Sistema {
            boolean controlador = true;
            Funcionario funcionario = null;
            for(Funcionario func : TP_POO.getFuncionariosCadastrados()){
-               if(func.getCfp().equals(cpfLogado)){
+               if( func != null && func.getCfp().equals(cpfLogado)){
                    funcionario = func;
                    break;
                }
@@ -1083,13 +1140,35 @@ public class Sistema {
                }
            }    
     }
-    
+    public static void estatisticasDoSistema() throws IOException{
+        HandlerJson.openAndReadJson();
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        
+        System.out.println("--------------ESTATÍSTICAS DA LANCHONETE--------------");
+        System.out.println("------------------------------------------------------");
+        double totalArrecadado = 0;
+        int pedidosRealizados = TP_POO.getMeusPedidos().size();
+        double valorMedio;
+        
+        for(Pedido pedido : TP_POO.getMeusPedidos()){
+            totalArrecadado += pedido.getValorTotal();
+        }
+        valorMedio = (totalArrecadado/pedidosRealizados);
+        String valorMedioFormatado = df.format(valorMedio);
+        
+        System.out.println("O TOTAL ARRECADADO COM AS VENDA NO ESTABELECIOMENTO FOI DE R$ " + totalArrecadado);
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("FORAM REALIZADOS " + pedidosRealizados + " PEDIDOS");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIOMENTO FOI R$ " + valorMedioFormatado);
+        
+    }
     public static void menuAdmin() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
         String opcaoDoSistema;
         String escolha = null;
-        System.out.println("\n------------- Logado como: Administrador -------------\n");
+        System.out.println("\n------------- LOGADO COMO: Administrador -------------\n");
         System.out.println("OPÇÕES"
                 +"\nREFERENTES AOS CLIENTES: "
                 + "\n1 -  Cadastrar novo cliente"
@@ -1221,6 +1300,70 @@ public class Sistema {
             } 
         }
     }
+    
+    public static void menuFuncionario() throws IOException{
+        HandlerJson.openAndReadJson();
+        Scanner scan = new Scanner(System.in);
+        String opcaoDoSistema;
+        System.out.println("\n---------- LOGADO COMO: Funcionário ----------\n");
+        System.out.println("OPÇÕES"
+                +"\nREFERENTES AOS FUNCIONARIOS: "
+                + "\n1 -  Editar minhas credenciais"
+                +"\n"
+                +"\nREFERENTES AOS PEDIDOS: "
+                + "\n2 - Cadastrar novo pedido"
+                + "\n3 - Editar estado de um pedido"
+                + "\n4 - Remover pedido"
+                + "\n5 - Listar pedidos (EXTRATOS)"
+                + "\n6 - Editar pedido"
+                +"\n"
+                +"\nREFERENTES À ESTATÍSTICAS E INFORMAÇÕES SOBRE VENDAS: "
+                +"\n7 - Estatísticas sobre vendas"
+                +"\n8 - Buscar pedidos por intervalo"
+                +"\n"
+               + "\n9 - Encerrar");
+        System.out.println("Digite a opção desejada: ");
+        opcaoDoSistema = scan.nextLine();
+        
+        switch(opcaoDoSistema){
+            case"1"->{
+                editarCredenciais();
+                continuarNoSistema();
+            }
+            case"2"->{
+                criarPedido();
+                continuarNoSistema();
+            }
+            case"3"->{
+                editarEstadoDoPedido();
+                continuarNoSistema();
+            }
+            case"4"->{
+                deletarPedido();
+                continuarNoSistema();
+            }
+            case"5"->{
+                exibirPedidos();
+                continuarNoSistema();
+            }
+            case"6"->{
+                editarPedido();
+                continuarNoSistema();
+            }
+            case"7"->{
+
+                continuarNoSistema();
+            }
+            case"8"->{
+
+                continuarNoSistema();
+            }
+            case"9"->{
+
+                continuarNoSistema();
+            }
+        }
+    }
     public static void continuarNoSistema() throws IOException{
         Scanner scan = new Scanner(System.in);
         String escolha = null;
@@ -1234,7 +1377,12 @@ public class Sistema {
                 escolha = scan.nextLine();
                 switch(escolha){
                     case "1"->{
-                        menuAdmin();
+                        if(adminLogado){
+                            menuAdmin();
+                        }else if(funcionarioLogado){
+                            menuFuncionario();
+                        }
+                        
                     }
                     case "2"->{
                         System.out.println("Encerrando o sistema...");
@@ -1245,34 +1393,5 @@ public class Sistema {
                         menuAdmin();
                     }
                 }
-    }
-    public static void menuFuncionario() throws IOException{
-        Scanner scan = new Scanner(System.in);
-        String opcaoDoSistema = scan.nextLine();
-        System.out.println("\n---------- Logado como: Funcionário ----------\n");
-        System.out.println("OPÇÕES"
-                +"\nREFERENTES AOS FUNCIONARIOS: "
-                + "\n1  -  Editar minhas credenciais"
-                +"\n"
-                +"\nREFERENTES AOS PEDIDOS: "
-                + "\n9  -  Cadastrar novo pedido"
-                + "\n10 - Remover pedido"
-                + "\n11 - Listar pedidos (EXTRATOS)"
-                + "\n12 - Editar pedido"
-                +"\n"
-                +"\nREFERENTES À ESTATÍSTICAS E INFORMAÇÕES SOBRE VENDAS: "
-                +"\n21 - Estatísticas sobre vendas"
-                +"\n22 - Buscar pedidos por intervalo"
-                +"\n"
-                + "\n23 - Encerrar");
-        System.out.println("Digite a opção desejada: ");
-        opcaoDoSistema = scan.nextLine();
-        
-        switch(opcaoDoSistema){
-            case"1"->{
-                editarCredenciais();
-                continuarNoSistema();
-            }
-        }
     }
 }

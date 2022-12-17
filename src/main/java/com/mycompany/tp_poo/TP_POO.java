@@ -19,7 +19,9 @@ public class TP_POO {
     public static void main(String[] args) throws Exception {
         HandlerJson.openAndReadJson();
         
-
+        //Sistema.editarEstadoDoPedido();
+        //Sistema.login();
+        //Sistema.menuFuncionario();
         //questão 12
         Collections.sort(clientesCadastrados);
         Collections.sort(meusPedidos);
@@ -27,7 +29,9 @@ public class TP_POO {
         //Sistema.criarFuncionario();
         //Sistema.criarFuncionario();
         //area de testes
-        Sistema.login();
+        //Sistema.login();
+        Sistema.estatisticasDoSistema();
+        
         //Sistema.menuAdmin();
         //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
         //System.out.println(numClientes());
