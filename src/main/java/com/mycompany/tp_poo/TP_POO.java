@@ -34,9 +34,9 @@ public class TP_POO {
         //area de testes
         //Sistema.login();
         //Sistema.estatisticasDoSistema();
-        
+        Sistema.menuFuncionario();
         //Sistema.menuAdmin();
-        Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
+        //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
         //System.out.println(numClientes());
        //Sistema.exibirClientes();
        //Sistema.criarCliente();

@@ -10,9 +10,15 @@ import java.util.Scanner;
 import java.util.Random;
 
 
-
+/**
+ * A classe <b>Sistema</b> é a classe responsável por agrupar todas as funcionalidades disponíveis no sistema da lanchonete até o momento. 
+ * 
+ */
 public class Sistema {
-
+    
+    /**
+     * Construtor padrão da classe <b>Sistema</b>
+     */
     public Sistema() {
     }
     public static String cpfLogado;
@@ -20,7 +26,9 @@ public class Sistema {
     public static boolean funcionarioLogado = false;
 
     
-    //CRUD CLIENTE
+    /**
+     * Método para a criação de instancias da classe <b>Cliente</b>.
+     */
     public static void criarCliente(){
         
         boolean cpfExiste = false;
@@ -53,11 +61,17 @@ public class Sistema {
         HandlerJson.saveToJSON();
     }
     
+    /**
+     * Método para listar todas as instancias da classe <b>Cliente</b> armazenadas na base de dados.
+     */
     public static void exibirClientes(){
         System.out.println("----------CLIENTES CADASTRADOS----------");
         System.out.println("Quantidade total: "+ TP_POO.getClientesCadastrados().size()+ " clientes cadastrados no sistema.");
         System.out.println(TP_POO.getClientesCadastrados());
     }
+    /**
+     * Método para editar uma as instancia da classe <b>Cliente</b> deve ser informado o identificador da instancia e, além disso há algumas verificações para validar sua existência.
+     */
     public static void editarCliente(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -163,6 +177,9 @@ public class Sistema {
         }
         
     }
+    /**
+     * Método para deletar uma as instancia da classe <b>Cliente</b>.Deve ser informado o identificador da instancia para que haja algumas verificações para validar sua existência antes da exclusão.
+     */
     public static void deletarCliente(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -183,7 +200,9 @@ public class Sistema {
         HandlerJson.saveToJSON();
     } 
     
-    //CRUD FUNCIONARIO
+    /**
+     * Método para a criação de instancias da classe <b>Funcionario</b>.
+     */
     public static void criarFuncionario() throws IOException{
         HandlerJson.openAndReadJson();
         
@@ -236,11 +255,17 @@ public class Sistema {
         }
         HandlerJson.saveToJSON();
     }
-    
+    /**
+     * Método para listar todas as instancias da classe <b>Funcionario</b> armazenadas na base de dados.
+     */
     public static void exibirFuncionarios(){
         System.out.println("----------FUNCIONÁRIOS CADASTRADOS----------");
         System.out.println(Arrays.toString(TP_POO.getFuncionariosCadastrados()));
     }
+    
+    /**
+     * Método para deletar uma as instancia da classe <b>Funcionario</b>.Deve ser informado o identificador da instancia para que haja algumas verificações que validem sua existência antes da exclusão.
+     */
     public static void deletarFuncionario(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -261,6 +286,10 @@ public class Sistema {
         }
         HandlerJson.saveToJSON();
     }
+    
+    /**
+     * Método para editar uma as instancia da classe <b>Funcionario</b> deve ser informado o identificador da instancia para que haja algumas verificações que validem sua existência antes da edição.
+     */
     public static void editarFuncionario(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -387,7 +416,9 @@ public class Sistema {
         }  
     }
     
-    //CRUD Adminstrador:
+    /**
+     * Método para a criação de instancias da classe <b>Funcionario</b>.
+     */
     public static void criarAdministrador(){
         System.out.println("----------CADASTRAR ADMINISTRADOR----------");
         Scanner scan = new Scanner(System.in);
@@ -420,11 +451,18 @@ public class Sistema {
         System.out.printf("Novo Administrador cadastrado com sucesso");   
     }
     
+    /**
+     * Método para listar todas as instancias da classe <b>Administrador</b> armazenadas na base de dados.
+     */
     public static void exibirAdministradores(){
         System.out.println("----------ADMISTRADORES CADASTRADOS----------");
         System.out.println("Atualmente o sistema conta com : "+ TP_POO.getAdministradoresCadastrados().size()+ " administradores.");
         System.out.println(TP_POO.getAdministradoresCadastrados());
     }
+    
+    /**
+     * Método para editar uma as instancia da classe <b>Administrador</b>.Deve ser informado o identificador da instancia para que haja algumas verificações para validar sua existência antes da edição.
+     */
     public static void editarAdministrador(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -552,6 +590,10 @@ public class Sistema {
         }
         HandlerJson.saveToJSON();
     }
+    
+    /**
+     * Método para deletar uma instancia da classe <b>Administrador</b>.Deve ser informado o identificador da instancia para que haja algumas verificações que validem sua existência antes da exclusão.
+     */
     public static void deletarAdministrador(){
         Scanner scan = new Scanner(System.in);
         String cpf;
@@ -572,6 +614,9 @@ public class Sistema {
         HandlerJson.saveToJSON();
     } 
     
+    /**
+     * Método para a criação de instancias da classe <b>Pedido</b>.
+     */ 
     public static void criarPedido() throws IOException{
         Scanner scan = new Scanner(System.in);
         float valorTotal = 0;
@@ -658,11 +703,17 @@ public class Sistema {
         HandlerJson.saveToJSON();
     }
     
+    /**
+     * Método para listar todas as instancias da classe <b>Pedido</b> armazenadas na base de dados. Esses são os extratos dos pedidos.
+     */
     public static void exibirPedidos(){
         System.out.println("----------PEDIDOS FEITOS----------");
         System.out.println(TP_POO.getMeusPedidos());
     }
     
+    /**
+     * Método para editar uma instancia da classe <b>Pedido</b>.Deve ser informado o identificador da instancia para que haja algumas verificações para validar sua existência antes da edição.
+     */
     public static void editarPedido() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -757,6 +808,9 @@ public class Sistema {
         }      
     }
     
+    /**
+     * Método para deletar uma instancia da classe <b>Pedido</b>.Deve ser informado o identificador da instancia para que haja algumas verificações que validem sua existência antes da exclusão.
+     */
     public static void deletarPedido(){
         Scanner scan = new Scanner(System.in);
         int id;
@@ -789,7 +843,10 @@ public class Sistema {
             e.getMessage();
         }
     }
-    
+    /**
+     * Método para alterar apenas o estado de uma instancia da classe <b>Pedido</b>. O método conta com verificações sobre a existencia do pedido e também para que o estado não possa ser alterado quando o estado for "Entregue".
+     * @throws IOException 
+     */
     public static void editarEstadoDoPedido() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -839,7 +896,11 @@ public class Sistema {
         }
     }
     
-    
+    /**
+     * Método para criação de IDs para instancias de <b>Produto</b> baseado em numeros aleatorios. OBS: O método conta com verificações para que nao haja instancias com mesmo id.
+     * @return retorna um numero inteiro que não tenha sido definido com id de outra instancia da mesma classe.
+     * @throws IOException 
+     */
     public static int criarIdProduto() throws IOException{
         HandlerJson.openAndReadJson();
         Random random = new Random();
@@ -855,6 +916,11 @@ public class Sistema {
         
         return numero;
     }
+    /**
+     * Método para criação de IDs para instancias de <b>Pedido</b> baseado em numeros aleatorios. OBS: O método conta com verificações para que nao haja instancias com mesmo id.
+     * @return retorna um numero inteiro que não tenha sido definido com id de outra instancia da mesma classe.
+     * @throws IOException 
+     */
     public static int criarIdPedido() throws IOException{
         HandlerJson.openAndReadJson();
         Random random = new Random();
@@ -871,6 +937,11 @@ public class Sistema {
         return numero;
     }
     
+    /**
+     * Método para a criação de instancias da classe <b>Produto</b>.
+     * @return o novo produto desde que esteja no formato correto, algo que é verificado.
+     * @throws IOException 
+     */
     public static Produto criarProduto() throws IOException{
         Scanner scan = new Scanner(System.in);
         Produto novoProduto = new Produto();
@@ -889,12 +960,18 @@ public class Sistema {
         
         return novoProduto;
     }
+    /**
+     * Método para listar todas as instancias da classe <b>Produto</b> armazenadas na base de dados.
+     */
     public static void exibirProdutos(){
         System.out.println("--------------PRODUTOS DISPONÍVEIS HOJE--------------");
         System.out.println("Nosso cardápio conta com um total de : "+ TP_POO.getMeusProdutos().size()+ " produtos.");
         System.out.println(TP_POO.getMeusProdutos());
     }  
     
+    /**
+     * Método para editar uma as instancia da classe <b>Produto</b>.Deve ser informado o identificador da instancia para que haja algumas verificações para validar sua existência antes da edição.
+     */
     public static void editarProduto(){
         Scanner scan = new Scanner(System.in);
         int opcao;
@@ -1002,6 +1079,9 @@ public class Sistema {
         HandlerJson.saveToJSON();
     }
     
+    /**
+     * Método para deletar uma instancia da classe <b>Produto</b>.Deve ser informado o identificador da instancia para que haja algumas verificações que validem sua existência antes da exclusão.
+     */
     public static void deletarProduto(){
         Scanner scan = new Scanner(System.in);
         int id;
@@ -1022,6 +1102,10 @@ public class Sistema {
         HandlerJson.saveToJSON();
     }
     
+    /**
+     * Método para que seja possivel entrar no sistema. Deve ser informado o tipo de usuario qu tentará acessar o sistema, após isso é feita uma verificação de credenciais na base de dados caso exista, o menu correspondente ao usuário será invocado e algumas variaveis do sistema serão setadas para que funcione corretamente.
+     * @throws IOException 
+     */
     public static void login() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -1116,7 +1200,10 @@ public class Sistema {
         }  
         return;
     }
-    
+    /**
+     * Método para que o funcionario consiga editar suas credenciais. No momento que o funcionario esta logado, ao chamar esse método ele conseguirá manipular apenas as suas credenciais.
+     * @throws IOException 
+     */
     public static void editarCredenciais() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -1181,6 +1268,10 @@ public class Sistema {
                }
            }    
     }
+    /**
+     * Método para exibir as estatísticas de vendas do estabelecimento, ele conta com o valor total arrecadado com as vendas, o número de pedidos realizados e o valor médio dos pedidos.
+     * @throws IOException 
+     */
     public static void estatisticasDoSistema() throws IOException{
         HandlerJson.openAndReadJson();
         DecimalFormat df = new DecimalFormat("#,###.00");
@@ -1204,6 +1295,10 @@ public class Sistema {
         System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIMENTO FOI R$ " + valorMedioFormatado);
         
     }
+    /**
+     * Método que invoca o menu do administrador do sistema. OBS: Só é acessado após login.
+     * @throws IOException 
+     */
     public static void menuAdmin() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -1343,6 +1438,10 @@ public class Sistema {
         }
     }
     
+    /**
+     * Método que invoca o menu do funcionario. OBS: Só é acessado após login.
+     * @throws IOException 
+     */
     public static void menuFuncionario() throws IOException{
         HandlerJson.openAndReadJson();
         Scanner scan = new Scanner(System.in);
@@ -1401,12 +1500,15 @@ public class Sistema {
                 continuarNoSistema();
             }
             case"9"->{
-
-                continuarNoSistema();
+                HandlerJson.saveToJSON();
+                System.out.println("Saindo do sistema...");
             }
         }
     }
-    
+    /**
+     * Método que verifica se o usuário, após realizar uma ação deseja permanecer no sistma ou sair dele.
+     * @throws IOException 
+     */
     public static void continuarNoSistema() throws IOException{
         Scanner scan = new Scanner(System.in);
         String escolha = null;
