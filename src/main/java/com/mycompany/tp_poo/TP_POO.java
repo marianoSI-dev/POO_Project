@@ -3,6 +3,8 @@ package com.mycompany.tp_poo;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Collections;
+import Comparators.ClienteComparator;
+import Comparators.PedidoComparator;
 
 /**
  * @author Mariano Carlos Silva 
@@ -26,15 +28,17 @@ public class TP_POO {
         //Sistema.login();
         //Sistema.menuFuncionario();
         //questão 12
-        Collections.sort(clientesCadastrados);
-        Collections.sort(meusPedidos);
+        
+        Collections.sort(clientesCadastrados, new ClienteComparator());
+        Collections.sort(meusPedidos, new PedidoComparator());
+        Sistema.exibirClientes();
         //Sistema.criarFuncionario();
         //Sistema.criarFuncionario();
         //Sistema.criarFuncionario();
         //area de testes
         //Sistema.login();
         //Sistema.estatisticasDoSistema();
-        Sistema.menuFuncionario();
+        //Sistema.menuFuncionario();
         //Sistema.menuAdmin();
         //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
         //System.out.println(numClientes());
