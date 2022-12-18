@@ -1433,7 +1433,8 @@ public class Sistema {
                 
             }
             case "23"->{
-
+                HandlerJson.saveToJSON();
+                System.out.println("Saindo do sistema...");
             } 
         }
     }

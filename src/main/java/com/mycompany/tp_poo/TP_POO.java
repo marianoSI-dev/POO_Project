@@ -1,12 +1,12 @@
 package com.mycompany.tp_poo;
 
 import java.util.ArrayList;
-
-import com.google.gson.*;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Collections;
 
-
+/**
+ * @author Mariano Carlos Silva 
+ */
 public class TP_POO {
     
     private static Funcionario funcionariosCadastrados[] = new Funcionario[15];
@@ -117,8 +117,8 @@ public class TP_POO {
        
     }   
     
-    //numero de clientes instanciados
-    //QUESTÃO 11
+
+    //QUESTÃO 11 - numero de clientes instanciados
     public static int numClientesEncapsulamento(){
         return Cliente.getNumClientes();
     }
@@ -134,43 +134,78 @@ public class TP_POO {
     
     
     
-    
-    public static ArrayList<Cliente> getClientesCadastrados() {
+    /**
+     * Método para listar todas as intancias da classe <b>Cliente</b> presentes no sistema.
+     * @return Retorna o valor contido no arraylist.
+     */
+    public static ArrayList<Cliente> getClientesCadastrados(){
         return clientesCadastrados;
     }
-
-    public static ArrayList<Pedido> getMeusPedidos() {
+    
+    /**
+     * Método para listar todas as intancias da classe <b>Pedido</b> presentes no sistema.
+     * @return Retorna o valor contido no arraylist.
+     */
+    public static ArrayList<Pedido> getMeusPedidos(){
         return meusPedidos;
     }
-
-    public static Funcionario[] getFuncionariosCadastrados() {
+    
+    /**
+     * Método para listar todas as intancias da classe <b>Funcionario</b> presentes no sistema.
+     * @return Retorna o valor contido no vetor.
+     */
+    public static Funcionario[] getFuncionariosCadastrados(){
         return funcionariosCadastrados;
     }
-
-    public static ArrayList<Produto> getMeusProdutos() {
+    
+    /**
+     * Método para listar todas as intancias da classe <b>Produto</b> presentes no sistema.
+     * @return Retorna o valor contido no arraylist.
+     */
+    public static ArrayList<Produto> getMeusProdutos(){
         return meusProdutos;
     }
-
-    public static ArrayList<Administrador> getAdministradoresCadastrados() {
+    
+    /**
+     * Método para listar todas as intancias da classe <b>Administrador</b> presentes no sistema.
+     * @return Retorna o valor contido no arraylist.
+     */
+    public static ArrayList<Administrador> getAdministradoresCadastrados(){
         return administradoresCadastrados;
     }
-
+    
+    /**
+     * Método para redefinir o valor do arraylist de administradores.
+     * @param administradoresCadastrados é o novo conteúdo do arraylist.
+     */
     public static void setAdministradoresCadastrados(ArrayList<Administrador> administradoresCadastrados) {
         TP_POO.administradoresCadastrados = administradoresCadastrados;
     }
-
+    /**
+     * Método para redefinir o valor do vetor de funcionários.
+     * @param funcionariosCadastrados é o novo conteúdo do vetor.
+     */
     public static void setFuncionariosCadastrados(Funcionario[] funcionariosCadastrados) {
         TP_POO.funcionariosCadastrados = funcionariosCadastrados;
     }
-
+    /**
+     * Método para redefinir o valor do vetor de clientes.
+     * @param clientesCadastrados é o novo conteúdo do arraylist.
+     */
     public static void setClientesCadastrados(ArrayList<Cliente> clientesCadastrados) {
         TP_POO.clientesCadastrados = clientesCadastrados;
     }
-
+    /**
+     * Método para redefinir o valor do vetor de pedidos.
+     * @param meusPedidos é o novo conteúdo do arraylist.
+     */
     public static void setMeusPedidos(ArrayList<Pedido> meusPedidos) {
         TP_POO.meusPedidos = meusPedidos;
     }
-
+    /**
+     * Método para redefinir o valor do vetor de produtos.
+     * @param meusProdutos é o novo conteúdo do arraylist.
+     */
     public static void setMeusProdutos(ArrayList<Produto> meusProdutos) {
         TP_POO.meusProdutos = meusProdutos;
     }
