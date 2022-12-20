@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+//Q13
 /**
  * A classe <b>HandlerJson</b> é a classe responsável por agrupar todas as funcionalidades referentes à manipulação da babse de dados do sistema, que consiste em operações com arrays, vetores e arquivos json. 
  * 

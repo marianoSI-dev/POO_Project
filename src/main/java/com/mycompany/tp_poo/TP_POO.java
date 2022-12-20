@@ -11,132 +11,42 @@ import Comparators.PedidoComparator;
  */
 public class TP_POO {
     
+    //Q5
     private static Funcionario funcionariosCadastrados[] = new Funcionario[15];
+    //Q8
     private static ArrayList<Cliente> clientesCadastrados = new ArrayList<>();
     private static ArrayList<Administrador> administradoresCadastrados = new ArrayList<>();
+    //Q8 e Q9
     private static ArrayList<Pedido> meusPedidos = new ArrayList<>();
     private static ArrayList<Produto> meusProdutos = new ArrayList<>();
 
     
     public static void main(String[] args) throws Exception {
         HandlerJson.openAndReadJson();
-        
-       //Sistema.deletarFuncionario();
-        //Sistema.criarFuncionario();
-        //Sistema.criarAdministrador();
-        //Sistema.editarEstadoDoPedido();
-        //Sistema.login();
-        //Sistema.menuFuncionario();
-        //questão 12
-        
         Collections.sort(clientesCadastrados, new ClienteComparator());
         Collections.sort(meusPedidos, new PedidoComparator());
-        Sistema.exibirClientes();
-        //Sistema.criarFuncionario();
-        //Sistema.criarFuncionario();
-        //Sistema.criarFuncionario();
-        //area de testes
-        //Sistema.login();
-        //Sistema.estatisticasDoSistema();
-        //Sistema.menuFuncionario();
-        //Sistema.menuAdmin();
-        //Sistema.login(); //JA INCLUI CHAMADAS AO SISTEMA
-        //System.out.println(numClientes());
-       //Sistema.exibirClientes();
-       //Sistema.criarCliente();
-       //System.out.println(numClientes());
-        //System.out.println("TESTE 1");
-        //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
-        //System.out.println(getAdministradoresCadastrados());
-        //System.out.println("TESTE 2");
-        //Sistema.criarAdmistrador();
-        //Sistema.exitAndSaveToJSON();
-        //Sistema.openAndReadJson();
-        //System.out.println(getAdministradoresCadastrados());
+       /*
+        EXEMPLO DE LOGINs PRÉ CADASTRADOS:
         
+        ADMINSTRADOR:
+        CFP: 9999999999
+        SENHA: admin
         
-        //Sistema.criarAdmistrador();
-        //Sistema.exitAndSaveToJSON();
-        //Sistema.exibirClientes();
-        //Sistema.editarCliente();
-        //Sistema.exibirClientes();
-        //Sistema.exibirFuncionarios();
-        //Sistema.editarFuncionario();
-        //Sistema.exibirFuncionarios();
-        //System.out.println(Pedido.getEstadosDoPedido()[2]);
-        //Sistema.criarPedido();
-        //Sistema.criarPedido();
-        //System.out.println(getMeusPedidos());
-        //Sistema.editarPedido();
-        //Sistema.deletarPedido();
-        //System.out.println(getMeusPedidos());
-        //Sistema.criarAdmistrador();
-        //Sistema.exibirAdminsitradores();
-        //Sistema.editarAdmistrador();
-        //Sistema.exibirAdminsitradores();
-        //Sistema.menuFuncionario();
-        //System.out.println(Arrays.toString(funcionariosCadastrados));
-        //Sistema.editarFuncionario();
-        //System.out.println(Arrays.toString(funcionariosCadastrados));
-        //Sistema.criarCliente();
-        //Sistema.criarPedido();
-        //Sistema.criarPedido();
-        //Sistema.criarPedido();
-        //Sistema.criarPedido();
-        //System.out.println(getClientesCadastrados());
-        //System.out.println(getMeusPedidos());
-        //System.out.println(getMeusPedidos());
-        //System.out.println(getAdministradoresCadastrados());
-        //Sistema.criarAdmistrador();
-        //Sistema.criarAdmistrador();
-        //Sistema.deletarAdministrador();
-        //System.out.println(getAdministradoresCadastrados());
-        //Sistema.criarProduto();
-        
-        //Sistema.criarPedido();
-        //Sistema.criarPedido();
-        //System.out.println(getMeusPedidos());
-        //Sistema.editarPedido();
-        
-        //Sistema.criarPedido();
-        //System.out.println(getMeusPedidos());
-        //Sistema.editarPedido();
-        //System.out.println(getMeusPedidos());
-        //System.out.println(getMeusProdutos());
-        //Sistema.criarProduto();
-        //System.out.println(getMeusProdutos());
-        //Sistema.criarPedido();
-
-        //System.out.println(getClientesCadastrados());
-        //Sistema.deletarCliente();
-        //System.out.println(getClientesCadastrados());
-
-        //Sistema.editarCliente();
-        
-       // Sistema.criarProduto();
-        //Sistema.exibirProdutos();
-        
-        //Sistema.criarCliente();
-        //System.out.println(Arrays.toString(getFuncionariosCadastrados()));
-       
+        FUNCIONARIO:
+        CPF: 1111111111
+        SENHA: mariano
+        */
+       Sistema.login();
     }   
     
 
-    //QUESTÃO 11 - numero de clientes instanciados
+    //Q11 
     public static int numClientesEncapsulamento(){
         return Cliente.getNumClientes();
     }
     public static int numClientesProtected(){
         return Cliente.numClientes2;
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     /**
      * Método para listar todas as intancias da classe <b>Cliente</b> presentes no sistema.

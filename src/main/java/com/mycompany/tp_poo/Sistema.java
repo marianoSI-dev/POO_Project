@@ -26,6 +26,7 @@ public class Sistema {
     public static boolean funcionarioLogado = false;
 
     
+    //Q6
     /**
      * Método para a criação de instancias da classe <b>Cliente</b>.
      */
@@ -69,6 +70,8 @@ public class Sistema {
         System.out.println("Quantidade total: "+ TP_POO.getClientesCadastrados().size()+ " clientes cadastrados no sistema.");
         System.out.println(TP_POO.getClientesCadastrados());
     }
+    
+    //Q6
     /**
      * Método para editar uma as instancia da classe <b>Cliente</b> deve ser informado o identificador da instancia e, além disso há algumas verificações para validar sua existência.
      */
@@ -259,8 +262,14 @@ public class Sistema {
      * Método para listar todas as instancias da classe <b>Funcionario</b> armazenadas na base de dados.
      */
     public static void exibirFuncionarios(){
-        System.out.println("----------FUNCIONÁRIOS CADASTRADOS----------");
-        System.out.println(Arrays.toString(TP_POO.getFuncionariosCadastrados()));
+        System.out.println("---------------------FUNCIONÁRIOS CADASTRADOS---------------------");
+        
+        for( Funcionario func : TP_POO.getFuncionariosCadastrados()){
+            if(func != null){
+                System.out.println(func);
+            }
+        }
+
     }
     
     /**
@@ -626,7 +635,7 @@ public class Sistema {
         
 
         
-        System.out.println("----------CADASTRAR PEDIDO----------");
+        System.out.println("--------------------CADASTRAR PEDIDO--------------------");
         System.out.println("Insira o cpf do cliente titular do pedido: ");
         cpfPedido = scan.nextLine();
         
@@ -695,6 +704,7 @@ public class Sistema {
                 }        
                 novoPedido.setValorTotal(valorTotal);
                 System.out.println(novoPedido);
+                System.out.println("VALOR TOTAL: "+valorTotal );
                 TP_POO.getMeusPedidos().add(novoPedido);
                 HandlerJson.saveToJSON();
                 //break;
@@ -703,6 +713,7 @@ public class Sistema {
         HandlerJson.saveToJSON();
     }
     
+    //Q7
     /**
      * Método para listar todas as instancias da classe <b>Pedido</b> armazenadas na base de dados. Esses são os extratos dos pedidos.
      */
@@ -1276,7 +1287,7 @@ public class Sistema {
         HandlerJson.openAndReadJson();
         DecimalFormat df = new DecimalFormat("#,###.00");
         
-        System.out.println("--------------ESTATÍSTICAS DA LANCHONETE--------------");
+        System.out.println("------------------------ESTATÍSTICAS DA LANCHONETE------------------------");
         System.out.println("------------------------------------------------------");
         double totalArrecadado = 0;
         int pedidosRealizados = TP_POO.getMeusPedidos().size();
@@ -1292,9 +1303,82 @@ public class Sistema {
         System.out.println("------------------------------------------------------------------------");
         System.out.println("FORAM REALIZADOS " + pedidosRealizados + " PEDIDOS");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIMENTO FOI R$ " + valorMedioFormatado);
-        
+        System.out.println("O VALOR MÉDIO DOS PEDIDOS FEITOS NO ESTABELECIMENTO FOI R$ " + valorMedioFormatado);       
     }
+    
+    /**
+     * Método para que os pedidos e suas informações passam ser pesquisados por intervalo de data e hora. 
+     */
+    public static void buscarPorIntervalo(){
+        Scanner scan = new Scanner(System.in);
+
+        String diaInicio;
+        String diaFim;
+        String mesInicio;
+        String mesFim;
+        String anoInicio;
+        String anoFim;
+        String dataInicio;
+        String dataFim;
+
+
+        ArrayList<Pedido> resultado = new ArrayList<>();
+
+        //data inicial
+        System.out.printf("Insira o dia inicial da sua consulta (dd): ");
+        diaInicio = scan.nextLine();
+        System.out.printf("Insira o mes inicial da sua consulta (mm): ");
+        mesInicio = scan.nextLine();
+        System.out.printf("Insira o ano inicial da sua consulta (yyyy): ");
+        anoInicio = scan.nextLine();
+        dataInicio = (anoInicio+'-'+mesInicio+'-'+diaInicio);
+        System.out.println("Data inicial " + dataInicio);
+
+        //data inicial
+        System.out.printf("Insira o dia final da sua consulta (dd): ");
+        diaFim = scan.nextLine();
+        System.out.printf("Insira o mes final da sua consulta (mm): ");
+        mesFim = scan.nextLine();
+        System.out.printf("Insira o ano final da sua consulta (yyyy): ");
+        anoFim = scan.nextLine();
+        dataFim = (anoFim+'-'+mesFim+'-'+diaFim);
+        System.out.println("Data final " + dataFim);
+
+
+        LocalDate inicio = LocalDate.parse(dataInicio);
+        LocalDate fim = LocalDate.parse(dataFim);
+
+        if(inicio.compareTo(fim) > 1){
+            System.out.println("A data de inicio não pode ser maior que a data final.");
+        }else{
+            for(Pedido pedido: TP_POO.getMeusPedidos()){
+                LocalDate pedidoDate = LocalDate.parse(pedido.getDataPedido());
+                if(inicio.compareTo(pedidoDate)<1 && fim.compareTo(pedidoDate)>1){
+                    resultado.add(pedido);
+                }
+            }       
+        }
+        System.out.println("Foram realizados um total de " + resultado.size()+ " pedidos(2)entre " + dataInicio+ " e " + dataFim);
+        for(Pedido pd : resultado){
+            String cliente = null;
+            for(Cliente cl: TP_POO.getClientesCadastrados()){
+                if(cl.getCpf().equals(pd.getClienteCpf())){
+                    cliente = cl.getNome();
+                }
+            }
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("CLIENTE: "+ cliente);
+            System.out.println("\n");
+            System.out.println("ID DO PEDIDO: "+ pd.getId());
+            System.out.println("DATA DO PEDIDO: "+ pd.getDataPedido());
+            System.out.println("HORA DO PEDIDO: "+ pd.getDataPedido());
+            System.out.println("DESCRIÇÂO: "+ pd.getDescricaoDetalhada());
+            System.out.println("VALOR TOTAL "+ pd.getValorTotal());
+            System.out.println("------------------------------------------------------------------------");
+        }
+
+    }
+    
     /**
      * Método que invoca o menu do administrador do sistema. OBS: Só é acessado após login.
      * @throws IOException 
@@ -1430,7 +1514,8 @@ public class Sistema {
                 continuarNoSistema();
             }
             case "22"->{
-                
+                buscarPorIntervalo();
+                continuarNoSistema();
             }
             case "23"->{
                 HandlerJson.saveToJSON();
@@ -1497,7 +1582,7 @@ public class Sistema {
                 continuarNoSistema();
             }
             case"8"->{
-
+                buscarPorIntervalo();
                 continuarNoSistema();
             }
             case"9"->{
